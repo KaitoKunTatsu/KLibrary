@@ -3,8 +3,8 @@ package Utils;
 /**
  * This class includes methods avoiding annoying array problems
  *
- * @version	v2.4: swap_LessMemory method added | 12.12.2021
- * @author	Joshua	||	KaitoKunTatsu#6562
+ * @version	v2.4 02.12.2021
+ * @author Joshua H. | KaitoKunTatsu#3656
  */
 public class  ArrayUtils {
 

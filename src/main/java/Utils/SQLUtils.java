@@ -3,7 +3,7 @@ package Utils;
 import java.sql.*;
 
 /**
- * Class that provides methods for secure SQL statements (preventing SQL-injection)
+ * Class providing methods for secure SQL statements (preventing SQL-injection)
  *
  * @version 11.08.2022
  * @author Joshua H. | KaitoKunTatsu#3656

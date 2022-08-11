@@ -8,8 +8,8 @@ import DataStructures.List;
 /**
  * GraphHandler ist eine Klasse, welche das erstellen und durchsuchen der Abiturklasse {@link DataStructures.Graph} erleichtert.
  *
- * @author Joshua H.
  * @version 1.0 | 29.03.2022
+ * @author Joshua H. | KaitoKunTatsu#3656
  * */
 public class GraphHandler
 {

@@ -8,7 +8,7 @@ import java.util.Base64;
 
 
 /**
- * Hasher class to encode strings to hashes
+ * Class providing hash methods and encryption/decryption (todo)
  *
  * @version 22.06.2022
  * @author Joshua H. | KaitoKunTatsu#3656
