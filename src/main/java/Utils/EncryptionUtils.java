@@ -8,7 +8,7 @@ import java.util.Base64;
 
 
 /**
- * Class providing hash methods and encryption/decryption (todo)
+ * This class provides hash methods and encryption/decryption (todo)
  *
  * @version 22.06.2022
  * @author Joshua H. | KaitoKunTatsu#3656

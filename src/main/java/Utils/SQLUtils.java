@@ -3,7 +3,7 @@ package Utils;
 import java.sql.*;
 
 /**
- * Class providing methods for secure SQL statements (preventing SQL-injection)
+ * This class provides methods for secure SQL statements (preventing SQL-injection)
  *
  * @version 11.08.2022
  * @author Joshua H. | KaitoKunTatsu#3656
@@ -13,7 +13,7 @@ public class SQLUtils {
     private final Connection con;
     private PreparedStatement stmt;
 
-    public SQLUtils(String pDBPath) throws SQLException, ClassNotFoundException {
+    public SQLUtils(String pDBPath) throws SQLException {
         con = DriverManager.getConnection("jdbc:sqlite:"+pDBPath);
         con.setAutoCommit(false);
     }
