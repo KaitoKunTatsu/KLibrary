@@ -3,6 +3,7 @@ package Utils;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -12,11 +13,11 @@ public class ServerSocketManager {
 
     private final ServerSocket serverSocket;
     // [ [Socket, OutStream, InStream], [...] ]
-    private final List<List<Object>> clientSockets;
+    private final List<List<Object>> clientConnections;
 
     public ServerSocketManager(int pPort, int pIOTimeout) throws IOException {
         serverSocket = new ServerSocket(pPort);
-        clientSockets = new ArrayList<>();
+        clientConnections = new ArrayList<>();
         serverSocket.setSoTimeout(pIOTimeout);
     }
 
@@ -24,17 +25,19 @@ public class ServerSocketManager {
         Socket newSocket = serverSocket.accept();
         DataOutputStream outStream = new DataOutputStream(newSocket.getOutputStream());
         DataInputStream inStream = new DataInputStream(newSocket.getInputStream());
-        clientSockets.add(new ArrayList<>() {{ add(newSocket); add(outStream); add(inStream); }});
+        clientConnections.add(new ArrayList<>() {{ add(newSocket); add(outStream); add(inStream); }});
     }
 
     public Socket getClientSocket(int pIndex)
     {
-        return (Socket) clientSockets.get(pIndex).get(0);
+        return (Socket) clientConnections.get(pIndex).get(0);
     }
+
+    public List<List<Object>> getAllConnections() { return clientConnections; }
 
     public String readInputFromSocket(int pIndex) {
         try {
-            return ((DataInputStream)clientSockets.get(pIndex).get(2)).readUTF();
+            return ((DataInputStream)clientConnections.get(pIndex).get(2)).readUTF();
         }
         catch (IOException e) {
             return "";
@@ -42,20 +45,24 @@ public class ServerSocketManager {
     }
 
     public void writeToSocket(String pMessage, int pIndex) throws IOException {
-        ((DataOutputStream) clientSockets.get(pIndex).get(1)).writeUTF(pMessage);
+        ((DataOutputStream) clientConnections.get(pIndex).get(1)).writeUTF(pMessage);
     }
 
     public void close() throws IOException {
-        for (int i = 0; i < clientSockets.size(); i++)
+        for (int i = 0; i < clientConnections.size(); i++)
         {
             try {
-                ((Socket)clientSockets.get(i).get(0)).close();
-                ((DataOutputStream)clientSockets.get(i).get(1)).close();
-                ((DataInputStream)clientSockets.get(i).get(2)).close();
+                ((Socket)clientConnections.get(i).get(0)).close();
+                ((DataOutputStream)clientConnections.get(i).get(1)).close();
+                ((DataInputStream)clientConnections.get(i).get(2)).close();
             }
             catch (IOException ignored) {}
-            finally {clientSockets.remove(i);}
+            finally {clientConnections.remove(i);}
         }
         serverSocket.close();
     }
+
+    public int getPort() {return serverSocket.getLocalPort();}
+
+    public InetAddress getIP() {return serverSocket.getInetAddress();}
 }
