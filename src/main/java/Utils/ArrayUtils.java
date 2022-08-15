@@ -3,10 +3,10 @@ package Utils;
 /**
  * This class includes methods avoiding annoying array problems
  *
- * @version	v2.4 02.12.2021
+ * @version	02.12.2021 (damn I coded trash back then)
  * @author Joshua H. | KaitoKunTatsu#3656
  */
-public class  ArrayUtils {
+public class ArrayUtils {
 
     // Searching ---------------------------------------------------------------------
 
@@ -17,11 +17,11 @@ public class  ArrayUtils {
      * 	@param element	Item to be searched for
      * 	@return 		returns	-1 if element not found, returns index of the item in the array similar to the element
      * */
-    public int binarySearch(int[] arr, int element)
+    public static int binarySearch(int[] arr, int element)
     {
         int first = 0;
         int last = arr.length-1;
-        int mid = (first +first)/2;
+        int mid = (first +last)/2;
         while(first <= last)
         {
             if (arr[mid] == element)
@@ -49,11 +49,11 @@ public class  ArrayUtils {
      * 	@param element	Item to be searched for
      * 	@return 		returns	-1 if element not found, returns index of the item in the array similar to the element
      * */
-    public int binarySearch(long[] arr, long element)
+    public static int binarySearch(long[] arr, long element)
     {
         int first = 0;
         int last = arr.length-1;
-        int mid = (first +first)/2;
+        int mid = (first +last)/2;
         while(first <= last)
         {
             if (arr[mid] == element)
@@ -81,11 +81,11 @@ public class  ArrayUtils {
      * 	@param element	Item to be searched for
      * 	@return 		returns	-1 if element not found, returns index of the item in the array similar to the element
      * */
-    public int binarySearch(float[] arr, float element)
+    public static int binarySearch(float[] arr, float element)
     {
         int first = 0;
         int last = arr.length-1;
-        int mid = (first +first)/2;
+        int mid = (first +last)/2;
         while(first <= last)
         {
             if (arr[mid] == element)
@@ -113,11 +113,11 @@ public class  ArrayUtils {
      * 	@param element	Item to be searched for
      * 	@return 		returns	-1 if element not found, returns index of the item in the array similar to the element
      * */
-    public int binarySearch(double[] arr, double element)
+    public static int binarySearch(double[] arr, double element)
     {
         int first = 0;
         int last = arr.length-1;
-        int mid = (first +first)/2;
+        int mid = (first +last)/2;
         while(first <= last)
         {
             if (arr[mid] == element)
@@ -145,12 +145,11 @@ public class  ArrayUtils {
      * 	@param element	Item to be searched for
      * 	@return			returns	-1 if element not found, returns index of the item in the array similar to the element
      * */
-    public int binarySearch(String[] arr, String element)
+    public static int binarySearch(String[] arr, String element)
     {
         int first = 0;
         int last = arr.length-1;
         int mid = (first + last)/2;
-
         while(first <= last)
         {
             if (arr[mid].equals(element))
@@ -179,7 +178,7 @@ public class  ArrayUtils {
      * 	@param ignoreCapitalLetters	if true it compares the element to the array due ignoring capital letters in both
      * 	@return 					returns	-1 if element not found, returns index of the item in the array similar to the element
      * */
-    public int binarySearch(String[] arr, String element, boolean ignoreCapitalLetters)
+    public static int binarySearch(String[] arr, String element, boolean ignoreCapitalLetters)
     {
 
         int first = 0;
@@ -223,7 +222,7 @@ public class  ArrayUtils {
      * 	@param element	Item to be searched for
      * 	@return 		returns -1 if element not found, returns index of the item in the array similar to the element
      * */
-    public int linearSearch(int[] arr, int element)
+    public static int linearSearch(int[] arr, int element)
     {
         for(int i=0; i < arr.length; i++)
         {
@@ -239,7 +238,7 @@ public class  ArrayUtils {
      * 	@param element	Item to be searched for
      * 	@return 		returns -1 if element not found, returns index of the item in the array similar to the element
      * */
-    public int linearSearch(float[] arr, float element)
+    public static int linearSearch(float[] arr, float element)
     {
         for(int i=0; i < arr.length; i++)
         {
@@ -255,7 +254,7 @@ public class  ArrayUtils {
      * 	@param element	Item to be searched for
      * 	@return 		returns -1 if element not found, returns index of the item in the array similar to the element
      * */
-    public int linearSearch(double[] arr, double element)
+    public static int linearSearch(double[] arr, double element)
     {
         for(int i=0; i < arr.length; i++)
         {
@@ -271,7 +270,7 @@ public class  ArrayUtils {
      * 	@param element	Item to be searched for
      * 	@return 		returns -1 if element not found, returns index of the item in the array similar to the element
      * */
-    public int linearSearch(long[] arr, long element)
+    public static int linearSearch(long[] arr, long element)
     {
         for(int i=0; i < arr.length; i++)
         {
@@ -287,7 +286,7 @@ public class  ArrayUtils {
      * 	@param element	Item to be searched for
      * 	@return			returns -1 if element not found, returns index of the item in the array similar to the element
      * */
-    public int linearSearch(String[] arr, String element)
+    public static int linearSearch(String[] arr, String element)
     {
         for(int i=0; i < arr.length; i++)
         {
@@ -304,7 +303,7 @@ public class  ArrayUtils {
      * 	@param ignoreCapitalLetters	if true it compares the element to the array due ignoring capital letters in both
      * 	@return 					returns -1 if element not found, returns index of the item in the array similar to the element
      * */
-    public int linearSearch(String[] arr, String element, boolean ignoreCapitalLetters)
+    public static int linearSearch(String[] arr, String element, boolean ignoreCapitalLetters)
     {
         for(int i=0; i < arr.length; i++)
         {
@@ -324,7 +323,7 @@ public class  ArrayUtils {
 
     // Sorting ---------------------------------------------------------------------
 
-    public int[] swap(int[] arr, int i1, int i2)
+    public static int[] swap(int[] arr, int i1, int i2)
     {
         int temp = arr[i1];
         arr[i1] = arr[i2];
@@ -332,7 +331,7 @@ public class  ArrayUtils {
         return arr;
     }
 
-    public String[] swap(String[] arr, int i1, int i2)
+    public static String[] swap(String[] arr, int i1, int i2)
     {
         String  temp = arr[i1];
         arr[i1] = arr[i2];
@@ -340,7 +339,7 @@ public class  ArrayUtils {
         return arr;
     }
 
-    public float[] swap(float[] arr, int i1, int i2)
+    public static float[] swap(float[] arr, int i1, int i2)
     {
         float temp = arr[i1];
         arr[i1] = arr[i2];
@@ -348,7 +347,7 @@ public class  ArrayUtils {
         return arr;
     }
 
-    public double[] swap(double[] arr, int i1, int i2)
+    public static double[] swap(double[] arr, int i1, int i2)
     {
         double temp = arr[i1];
         arr[i1] = arr[i2];
@@ -356,7 +355,7 @@ public class  ArrayUtils {
         return arr;
     }
 
-    public long[] swap(long[] arr, int i1, int i2)
+    public static long[] swap(long[] arr, int i1, int i2)
     {
         long temp = arr[i1];
         arr[i1] = arr[i2];
@@ -364,7 +363,7 @@ public class  ArrayUtils {
         return arr;
     }
 
-    public char[] swap(char[] arr, int i1, int i2)
+    public static char[] swap(char[] arr, int i1, int i2)
     {
         char temp = arr[i1];
         arr[i1] = arr[i2];
@@ -372,7 +371,7 @@ public class  ArrayUtils {
         return arr;
     }
 
-    public int[] swap_LessMemory(int[] arr, int i1, int i2)
+    public static int[] swap_LessMemory(int[] arr, int i1, int i2)
     {
         try {
             Math.addExact(arr[i1],arr[i2]);
@@ -385,7 +384,7 @@ public class  ArrayUtils {
         }
     }
 
-    public long[] swap_LessMemory(long[] arr, int i1, int i2)
+    public static long[] swap_LessMemory(long[] arr, int i1, int i2)
     {
         try {
             Math.addExact(arr[i1],arr[i2]);
@@ -398,7 +397,7 @@ public class  ArrayUtils {
         }
     }
 
-    private int partition(int[] arr, int iStart, int iEnd)
+    private static int partition(int[] arr, int iStart, int iEnd)
     {
         int pivot = (iStart+iEnd)/2;
         int low = iStart;
@@ -420,7 +419,7 @@ public class  ArrayUtils {
      * 	@param arr	Array
      * 	@return		Returns arr but sorted
      * */
-    public void quickSort(int[] arr, final int iStart, final int iEnd)
+    public static void quickSort(int[] arr, final int iStart, final int iEnd)
     {
         int index = partition(arr, iStart, iEnd);
 
@@ -429,25 +428,25 @@ public class  ArrayUtils {
     }
 
     // private fun
-    private int compare(int[] arr, int old, int pNew, int element)
+    private static int compare(int[] arr, int old, int pNew, int element)
     {
         if ((element - arr[old]) * (element - arr[old]) < (element - arr[pNew]) * (element - arr[pNew])) return old;
         else return pNew;
     }
 
-    private int compare(float[] arr, int old, int pNew, float element)
+    private static int compare(float[] arr, int old, int pNew, float element)
     {
         if ((element - arr[old]) * (element - arr[old]) < (element - arr[pNew]) * (element - arr[pNew])) return old;
         else return pNew;
     }
 
-    private int compare(double[] arr, int old, int pNew, double element)
+    private static int compare(double[] arr, int old, int pNew, double element)
     {
         if ((element - arr[old]) * (element - arr[old]) < (element - arr[pNew]) * (element - arr[pNew])) return old;
         else return pNew;
     }
 
-    private int compare(long[] arr, int old, int pNew, long element)
+    private static int compare(long[] arr, int old, int pNew, long element)
     {
         if ((element - arr[old]) * (element - arr[old]) < (element - arr[pNew]) * (element - arr[pNew])) return old;
         else return pNew;
@@ -461,7 +460,7 @@ public class  ArrayUtils {
      * 	@param element	Item to sort in
      * 	@return 		New array including the old one and the element
      * */
-    public int[] sortIntoArr(int[] arr, int element)
+    public static int[] sortIntoArr(int[] arr, int element)
     {
         if (element >= arr[arr.length-1])
         {
@@ -515,7 +514,7 @@ public class  ArrayUtils {
      * 	@param element	Item to sort in
      * 	@return 		New array including the old one and the element
      * */
-    public double[] sortIntoArr(double[] arr, double element)
+    public static double[] sortIntoArr(double[] arr, double element)
     {
         if (element >= arr[arr.length-1])
         {
@@ -569,7 +568,7 @@ public class  ArrayUtils {
      * 	@param element	Item to sort in
      * 	@return 		New array including the old one and the element
      * */
-    public float[] sortIntoArr(float[] arr, float element)
+    public static float[] sortIntoArr(float[] arr, float element)
     {
         if (element >= arr[arr.length-1])
         {
@@ -623,7 +622,7 @@ public class  ArrayUtils {
      * 	@param element	Item to sort in
      * 	@return 		New array including the old one and the element
      * */
-    public long[] sortIntoArr(long[] arr, long element)
+    public static long[] sortIntoArr(long[] arr, long element)
     {
         if (element >= arr[arr.length-1])
         {
@@ -675,7 +674,7 @@ public class  ArrayUtils {
      * 	@param arr		Array in which should be sorted
      * 	@return 		Returns arr but sorted
      * */
-    public int[] selectionSort(int[] arr)
+    public static int[] selectionSort(int[] arr)
     {
         for (int i = 0; i < arr.length; i++)
         {
@@ -695,7 +694,7 @@ public class  ArrayUtils {
      * 	@param arr		Array in which should be sorted
      * 	@return 		Returns arr but sorted
      * */
-    public long[] selectionSort(long[] arr)
+    public static long[] selectionSort(long[] arr)
     {
         for (int i = 0; i < arr.length; i++)
         {
@@ -715,7 +714,7 @@ public class  ArrayUtils {
      * 	@param arr		Array in which should be sorted
      * 	@return 		Returns arr but sorted
      * */
-    public double[] selectionSort(double[] arr)
+    public static double[] selectionSort(double[] arr)
     {
         for (int i = 0; i < arr.length; i++)
         {
@@ -735,7 +734,7 @@ public class  ArrayUtils {
      * 	@param arr		Array in which should be sorted
      * 	@return 		Returns arr but sorted
      * */
-    public float[] selectionSort(float[] arr)
+    public static float[] selectionSort(float[] arr)
     {
         for (int i = 0; i < arr.length; i++)
         {
@@ -755,7 +754,7 @@ public class  ArrayUtils {
      * 	@param arr		Array in which should be sorted
      * 	@return 		Returns arr but sorted
      * */
-    public char[] selectionSort(char[] arr)
+    public static char[] selectionSort(char[] arr)
     {
         for (int i = 0; i < arr.length; i++)
         {
@@ -881,7 +880,7 @@ public class  ArrayUtils {
      * 	@param arr2	Second array to merge
      * 	@return 	New array including arr1 and arr2
      * */
-    public Object[] mergeArrays(Object[] arr1, Object[] arr2)
+    public static Object[] mergeArrays(Object[] arr1, Object[] arr2)
     {
         Object[] retArr = new Object[arr1.length + arr2.length];
         int counter = 0;
@@ -903,7 +902,7 @@ public class  ArrayUtils {
      * 	@param arr2	Second array to merge
      * 	@return 	New array including arr1 and arr2
      * */
-    public boolean[] mergeArrays(boolean[] arr1, boolean[] arr2)
+    public static boolean[] mergeArrays(boolean[] arr1, boolean[] arr2)
     {
         boolean[] retArr = new boolean[arr1.length + arr2.length];
         int counter = 0;
@@ -925,7 +924,7 @@ public class  ArrayUtils {
      * 	@param arr2	Second array to merge
      * 	@return 	New array including arr1 and arr2
      * */
-    public char[] mergeArrays(char[] arr1, char[] arr2)
+    public static char[] mergeArrays(char[] arr1, char[] arr2)
     {
         char[] retArr = new char[arr1.length + arr2.length];
         int counter = 0;
@@ -947,7 +946,7 @@ public class  ArrayUtils {
      * 	@param arr2	Second array to merge
      * 	@return 	New array including arr1 and arr2
      * */
-    public String[] mergeArrays(String[] arr1, String[] arr2)
+    public static String[] mergeArrays(String[] arr1, String[] arr2)
     {
         String[] retArr = new String[arr1.length + arr2.length];
         int counter = 0;
@@ -969,7 +968,7 @@ public class  ArrayUtils {
      * 	@param arr2	Second array to merge
      * 	@return 	New array including arr1 and arr2
      * */
-    public int[] mergeArrays(int[] arr1, int[] arr2)
+    public static int[] mergeArrays(int[] arr1, int[] arr2)
     {
         int[] retArr = new int[arr1.length + arr2.length];
         int counter = 0;
@@ -991,7 +990,7 @@ public class  ArrayUtils {
      * 	@param arr2	Second array to merge
      * 	@return 	New array including arr1 and arr2
      * */
-    public long[] mergeArrays(long[] arr1, long[] arr2)
+    public static long[] mergeArrays(long[] arr1, long[] arr2)
     {
         long[] retArr = new long[arr1.length + arr2.length];
         int counter = 0;
@@ -1013,7 +1012,7 @@ public class  ArrayUtils {
      * 	@param arr2	Second array to merge
      * 	@return 	New array including arr1 and arr2
      * */
-    public float[] mergeArrays(float[] arr1, float[] arr2)
+    public static float[] mergeArrays(float[] arr1, float[] arr2)
     {
         float[] retArr = new float[arr1.length + arr2.length];
         int counter = 0;
@@ -1035,7 +1034,7 @@ public class  ArrayUtils {
      * 	@param arr2	Second array to merge
      * 	@return 	New array including arr1 and arr2
      * */
-    public double[] mergeArrays(double[] arr1, double[] arr2)
+    public static double[] mergeArrays(double[] arr1, double[] arr2)
     {
         double[] retArr = new double[arr1.length + arr2.length];
         int counter = 0;
@@ -1057,7 +1056,7 @@ public class  ArrayUtils {
      *
      * 	@param arr	array to print
      * */
-    public void printArr(String[] arr)
+    public static void printArr(String[] arr)
     {
         for (String element : arr)
         {
@@ -1070,7 +1069,7 @@ public class  ArrayUtils {
      *
      * 	@param arr	array to print
      * */
-    public void printArr(long[] arr)
+    public static void printArr(long[] arr)
     {
         for (long element : arr)
         {
@@ -1083,7 +1082,7 @@ public class  ArrayUtils {
      *
      * 	@param arr	array to print
      * */
-    public void printArr(int[] arr)
+    public static void printArr(int[] arr)
     {
         for (int element : arr)
         {
@@ -1096,7 +1095,7 @@ public class  ArrayUtils {
      *
      * 	@param arr	array to print
      * */
-    public void printArr(boolean[] arr)
+    public static void printArr(boolean[] arr)
     {
         for (boolean element : arr)
         {
@@ -1109,7 +1108,7 @@ public class  ArrayUtils {
      *
      * 	@param arr	array to print
      * */
-    public void printArr(char[] arr)
+    public static void printArr(char[] arr)
     {
         for (char element : arr)
         {
@@ -1122,7 +1121,7 @@ public class  ArrayUtils {
      *
      * 	@param arr	array to print
      * */
-    public void printArr(double[] arr)
+    public static void printArr(double[] arr)
     {
         for (double element : arr)
         {
@@ -1135,7 +1134,7 @@ public class  ArrayUtils {
      *
      * 	@param arr	array to print
      * */
-    public void printArr(float[] arr)
+    public static void printArr(float[] arr)
     {
         for (float element : arr)
         {
@@ -1148,7 +1147,7 @@ public class  ArrayUtils {
      *
      * 	@param arr	array to print
      * */
-    public void printlnArr(String[] arr)
+    public static void printlnArr(String[] arr)
     {
         for (String element : arr)
         {
@@ -1161,7 +1160,7 @@ public class  ArrayUtils {
      *
      * 	@param arr	array to print
      * */
-    public void printlnArr(long[] arr)
+    public static void printlnArr(long[] arr)
     {
         for (long element : arr)
         {
@@ -1174,7 +1173,7 @@ public class  ArrayUtils {
      *
      * 	@param arr	array to print
      * */
-    public void printlnArr(int[] arr)
+    public static void printlnArr(int[] arr)
     {
         for (int element : arr)
         {
@@ -1187,7 +1186,7 @@ public class  ArrayUtils {
      *
      * 	@param arr	array to print
      * */
-    public void printlnArr(boolean[] arr)
+    public static void printlnArr(boolean[] arr)
     {
         for (boolean element : arr)
         {
@@ -1200,7 +1199,7 @@ public class  ArrayUtils {
      *
      * 	@param arr	array to print
      * */
-    public void printlnArr(char[] arr)
+    public static void printlnArr(char[] arr)
     {
         for (char element : arr)
         {
@@ -1213,7 +1212,7 @@ public class  ArrayUtils {
      *
      * 	@param arr	array to print
      * */
-    public void printlnArr(double[] arr)
+    public static void printlnArr(double[] arr)
     {
         for (double element : arr)
         {
@@ -1226,7 +1225,7 @@ public class  ArrayUtils {
      *
      * 	@param arr	array to print
      * */
-    public void printlnArr(float[] arr)
+    public static void printlnArr(float[] arr)
     {
         for (float element : arr)
         {
@@ -1239,7 +1238,7 @@ public class  ArrayUtils {
      * 	@param element	Element which should be added
      * 	@return 		New Array containing the old one plus the new element pasted at the end
      * */
-    public String[] addElementToArray(String[] arr, String element)
+    public static String[] addElementToArray(String[] arr, String element)
     {
         String[] newArr = new String[arr.length + 1];
         int counter = 0;
@@ -1257,7 +1256,7 @@ public class  ArrayUtils {
      * 	@param element	Element which should be added
      * 	@return 		New Array containing the old one plus the new element pasted at the end
      * */
-    public long[] addElementToArray(long[] arr, long element)
+    public static long[] addElementToArray(long[] arr, long element)
     {
         long[] newArr = new long[arr.length + 1];
         int counter = 0;
@@ -1275,7 +1274,7 @@ public class  ArrayUtils {
      * 	@param element	Element which should be added
      * 	@return 		New Array containing the old one plus the new element pasted at the end
      * */
-    public int[] addElementToArray(int[] arr, int element)
+    public static int[] addElementToArray(int[] arr, int element)
     {
         int[] newArr = new int[arr.length + 1];
         int counter = 0;
@@ -1293,7 +1292,7 @@ public class  ArrayUtils {
      * 	@param element	Element which should be added
      * 	@return 		New Array containing the old one plus the new element pasted at the end
      * */
-    public boolean[] addElementToArray(boolean[] arr, boolean element)
+    public static boolean[] addElementToArray(boolean[] arr, boolean element)
     {
         boolean[] newArr = new boolean[arr.length + 1];
         int counter = 0;
@@ -1311,7 +1310,7 @@ public class  ArrayUtils {
      * 	@param element	Element which should be added
      * 	@return 		New Array containing the old one plus the new element pasted at the end
      * */
-    public char[] addElementToArray(char[] arr, char element)
+    public static char[] addElementToArray(char[] arr, char element)
     {
         char[] newArr = new char[arr.length + 1];
         int counter = 0;
@@ -1329,7 +1328,7 @@ public class  ArrayUtils {
      * 	@param element	Element which should be added
      * 	@return 		New Array containing the old one plus the new element pasted at the end
      * */
-    public float[] addElementToArray(float[] arr, float element)
+    public static float[] addElementToArray(float[] arr, float element)
     {
         float[] newArr = new float[arr.length + 1];
         int counter = 0;
@@ -1347,7 +1346,7 @@ public class  ArrayUtils {
      * 	@param element	Element which should be added
      * 	@return 		New Array containing the old one plus the new element pasted at the end
      * */
-    public double[] addElementToArray(double[] arr, double element)
+    public static double[] addElementToArray(double[] arr, double element)
     {
         double[] newArr = new double[arr.length + 1];
         int counter = 0;
@@ -1366,7 +1365,7 @@ public class  ArrayUtils {
      * 	@param value	Integer which says how many spaces should be added
      * 	@return 		Old array plus spaces added
      * */
-    public String[] addSpaceToArray(String[] arr, int value)
+    public static String[] addSpaceToArray(String[] arr, int value)
     {
         String[] newArr = new String[arr.length + value];
         int counter = 0;
@@ -1383,7 +1382,7 @@ public class  ArrayUtils {
      * 	@param value	Integer which says how many spaces should be added
      * 	@return			Old array plus spaces added
      * */
-    public int[] addSpaceToArray(int[] arr, int value)
+    public static int[] addSpaceToArray(int[] arr, int value)
     {
         int[] newArr = new int[arr.length + value];
         int counter = 0;
@@ -1400,7 +1399,7 @@ public class  ArrayUtils {
      * 	@param value	Integer which says how many spaces should be added
      * 	@return			Old array plus spaces added
      * */
-    public long[] addSpaceToArray(long[] arr, int value)
+    public static long[] addSpaceToArray(long[] arr, int value)
     {
         long[] newArr = new long[arr.length + value];
         int counter = 0;
@@ -1417,7 +1416,7 @@ public class  ArrayUtils {
      * 	@param value	Integer which says how many spaces should be added
      * 	@return 		Old array plus spaces added
      * */
-    public double[] addSpaceToArray(double[] arr, int value)
+    public static double[] addSpaceToArray(double[] arr, int value)
     {
         double[] newArr = new double[arr.length + value];
         int counter = 0;
@@ -1434,7 +1433,7 @@ public class  ArrayUtils {
      * 	@param value	Integer which says how many spaces should be added
      * 	@return 		Old array plus spaces added
      * */
-    public float[] addSpaceToArray(float[] arr, int value)
+    public static float[] addSpaceToArray(float[] arr, int value)
     {
         float[] newArr = new float[arr.length + value];
         int counter = 0;
@@ -1447,66 +1446,48 @@ public class  ArrayUtils {
     }
 
     /**
-     * 	Method to convert an array to a string. Different elements are divided though ;;
+     * 	Method to convert an array to a string. Different elements are divided by ;;
      *
      * 	@param arr	Array which should be converted
      * 	@return		Returns a string including all elements from arr
      * */
-    public String toString(String[] arr)
+    public static String toString(String[] arr)
     {
-        String newStr = arr[0];
-        try
-        {
-            for (int i = 1; i < arr.length; i++)
-            {
-                newStr = newStr + ";;" + arr[i];
-            }
+        StringBuilder newStr = new StringBuilder(arr[0]);
+        for (int i = 1; i < arr.length; i++) {
+            newStr.append(";;").append(arr[1]);
         }
-        catch (Exception e)
-        {}
-        return newStr;
+        return newStr.toString();
     }
 
     /**
-     * 	Method to convert an array to a string. Different elements are divided though ;;
+     * 	Method to convert an array to a string. Different elements are divided by ;;
      *
      * 	@param arr	Array which should be converted
      * 	@return		returns a string including all elements from arr
      * */
-    public String toString(int[] arr)
+    public static String toString(int[] arr)
     {
-        String newStr = Integer.toString(arr[0]);
-        try
-        {
-            for (int i = 1; i < arr.length; i++)
-            {
-                newStr = newStr + ";;" + arr[i];
-            }
+        StringBuilder newStr = new StringBuilder(String.valueOf(arr[0]));
+        for (int i = 1; i < arr.length; i++) {
+            newStr.append(";;").append(arr[1]);
         }
-        catch (Exception e)
-        {}
-        return newStr;
+        return newStr.toString();
     }
 
     /**
-     * 	Method to convert an array to a string. Different elements are divided though ;;
+     * 	Method to convert an array to a string. Different elements are divided by ;;
      *
      * 	@param arr	Array which should be converted
      * 	@return		returns a string including all elements from arr
      * */
-    public String toString(long[] arr)
+    public static String toString(long[] arr)
     {
-        String newStr = Long.toString(arr[0]);
-        try
-        {
-            for (int i = 1; i < arr.length; i++)
-            {
-                newStr = newStr + ";;" + Long.toString(arr[i]);
-            }
+        StringBuilder newStr = new StringBuilder(String.valueOf(arr[0]));
+        for (int i = 1; i < arr.length; i++) {
+            newStr.append(";;").append(arr[1]);
         }
-        catch (Exception e)
-        {}
-        return newStr;
+        return newStr.toString();
     }
 
     /**
@@ -1515,7 +1496,7 @@ public class  ArrayUtils {
      * 	@param index	Index of the element which should be removed
      * 	@return			New Array containing the old except the element of Index
      * */
-    public int[] remove(int[] arr, int index)
+    public static int[] remove(int[] arr, int index)
     {
         int[] newArr = new int[arr.length-1];
         int counter = 0;
@@ -1539,7 +1520,7 @@ public class  ArrayUtils {
      * 	@param indexEnd		Index of the last element to remove
      * 	@return				New Array containing the old except the elements between indexStart (not included) and indexEnd (not included)
      * */
-    public int[] remove(int[] arr, int indexStart, int indexEnd)
+    public static int[] remove(int[] arr, int indexStart, int indexEnd)
     {
         if ((indexEnd-indexStart-1) < 0) return arr;
         int[] newArr = new int[arr.length-(indexEnd-indexStart-1)];
@@ -1563,7 +1544,7 @@ public class  ArrayUtils {
      * 	@param index	Index of the element which should be removed
      * 	@return			New Array containing the old except the element of Index
      * */
-    public long[] remove(long[] arr, int index)
+    public static long[] remove(long[] arr, int index)
     {
         long[] newArr = new long[arr.length-1];
         int counter = 0;
@@ -1587,7 +1568,7 @@ public class  ArrayUtils {
      * 	@param indexEnd		Index of the last element to remove
      * 	@return				New Array containing the old except the elements between indexStart (not included) and indexEnd (not included)
      * */
-    public long[] remove(long[] arr, int indexStart, int indexEnd)
+    public static long[] remove(long[] arr, int indexStart, int indexEnd)
     {
         if ((indexEnd-indexStart-1) < 0) return arr;
         long[] newArr = new long[arr.length-(indexEnd-indexStart-1)];
@@ -1611,7 +1592,7 @@ public class  ArrayUtils {
      * 	@param index	Index of the element which should be removed
      * 	@return			New Array containing the old except the element of Index
      * */
-    public String[] remove(String[] arr, int index)
+    public static String[] remove(String[] arr, int index)
     {
         String[] newArr = new String[arr.length-1];
         int counter = 0;
@@ -1635,7 +1616,7 @@ public class  ArrayUtils {
      * 	@param indexEnd		Index of the last element to remove
      * 	@return				New Array containing the old except the elements between indexStart (not included) and indexEnd (not included)
      * */
-    public String[] remove(String[] arr, int indexStart, int indexEnd)
+    public static String[] remove(String[] arr, int indexStart, int indexEnd)
     {
         if ((indexEnd-indexStart-1) < 0) return arr;
         String[] newArr = new String[arr.length-(indexEnd-indexStart-1)];
@@ -1659,7 +1640,7 @@ public class  ArrayUtils {
      * 	@param index	Index of the element which should be removed
      * 	@return			New Array containing the old except the element of Index
      * */
-    public boolean[] remove(boolean[] arr, int index)
+    public static boolean[] remove(boolean[] arr, int index)
     {
         boolean[] newArr = new boolean[arr.length-1];
         int counter = 0;
@@ -1683,7 +1664,7 @@ public class  ArrayUtils {
      * 	@param indexEnd		Index of the last element to remove
      * 	@return				New Array containing the old except the elements between indexStart (not included) and indexEnd (not included)
      * */
-    public boolean[] remove(boolean[] arr, int indexStart, int indexEnd)
+    public static boolean[] remove(boolean[] arr, int indexStart, int indexEnd)
     {
         if ((indexEnd-indexStart-1) < 0) return arr;
         boolean[] newArr = new boolean[arr.length-(indexEnd-indexStart-1)];
@@ -1707,7 +1688,7 @@ public class  ArrayUtils {
      * 	@param index	Index of the element which should be removed
      * 	@return			New Array containing the old except the element of Index
      * */
-    public char[] remove(char[] arr, int index)
+    public static char[] remove(char[] arr, int index)
     {
         char[] newArr = new char[arr.length-1];
         int counter = 0;
@@ -1731,7 +1712,7 @@ public class  ArrayUtils {
      * 	@param indexEnd		Index of the last element to remove
      * 	@return				New Array containing the old except the elements between indexStart (not included) and indexEnd (not included)
      * */
-    public char[] remove(char[] arr, int indexStart, int indexEnd)
+    public static char[] remove(char[] arr, int indexStart, int indexEnd)
     {
         if ((indexEnd-indexStart-1) < 0) return arr;
         char[] newArr = new char[arr.length-(indexEnd-indexStart-1)];
@@ -1756,7 +1737,7 @@ public class  ArrayUtils {
      * 	@param index	Index of the element which should be removed
      * 	@return			New Array containing the old except the element of Index
      * */
-    public float[] remove(float[] arr, int index)
+    public static float[] remove(float[] arr, int index)
     {
         float[] newArr = new float[arr.length-1];
         int counter = 0;
@@ -1780,7 +1761,7 @@ public class  ArrayUtils {
      * 	@param indexEnd		Index of the last element to remove
      * 	@return				New Array containing the old except the elements between indexStart (not included) and indexEnd (not included)
      * */
-    public float[] remove(float[] arr, int indexStart, int indexEnd)
+    public static float[] remove(float[] arr, int indexStart, int indexEnd)
     {
         if ((indexEnd-indexStart-1) < 0) return arr;
         float[] newArr = new float[arr.length-(indexEnd-indexStart-1)];
@@ -1805,7 +1786,7 @@ public class  ArrayUtils {
      * 	@param index	Index of the element which should be removed
      * 	@return			New Array containing the old except the element of Index
      * */
-    public double[] remove(double[] arr, int index)
+    public static double[] remove(double[] arr, int index)
     {
         double[] newArr = new double[arr.length-1];
         int counter = 0;
@@ -1829,7 +1810,7 @@ public class  ArrayUtils {
      * 	@param indexEnd		Index of the last element to remove
      * 	@return				New Array containing the old except the elements between indexStart (not included) and indexEnd (not included)
      * */
-    public double[] remove(double[] arr, int indexStart, int indexEnd)
+    public static double[] remove(double[] arr, int indexStart, int indexEnd)
     {
         if ((indexEnd-indexStart-1) < 0) return arr;
         double[] newArr = new double[arr.length-(indexEnd-indexStart-1)];

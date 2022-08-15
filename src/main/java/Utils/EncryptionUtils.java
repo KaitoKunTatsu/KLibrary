@@ -2,8 +2,11 @@ package Utils;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
+import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
+import java.util.Arrays;
 import java.util.Base64;
 
 
@@ -15,44 +18,40 @@ import java.util.Base64;
  * */
 public class EncryptionUtils {
 
-    private final int cost;
 
-    private final int keyLength = 512;
+    private static final String ALGORITHM = "PBKDF2WithHmacSHA512";
 
-    private final static String algorithmName = "PBKDF2WithHmacSHA512";
+    private static final int SIZE = 512;
 
-    private final byte[] salt;
+    private static final SecureRandom random = new SecureRandom();;
 
-    public EncryptionUtils(byte[] pSalt)
+    private static String getHash(String pString, byte[] pSalt) throws NoSuchAlgorithmException, InvalidKeySpecException {
+        KeySpec spec = new PBEKeySpec(pString.toCharArray(), pSalt, 65536, SIZE);
+        SecretKeyFactory key_factory = SecretKeyFactory.getInstance(ALGORITHM);
+        byte[] hash_value = key_factory.generateSecret(spec).getEncoded();
+        Base64.Encoder encoder = Base64.getEncoder();
+        return encoder.encodeToString(hash_value);
+    }
+
+    public static String getHash(String pString, int pCost) throws NoSuchAlgorithmException, InvalidKeySpecException {
+        byte[] lSalt = new byte[pCost];
+        random.nextBytes(lSalt);
+
+        return getHash(pString, lSalt);
+    }
+
+    public static String[] getHashAndSalt(String pString, int pCost) throws NoSuchAlgorithmException, InvalidKeySpecException {
+        byte[] lSalt = new byte[pCost];
+        random.nextBytes(lSalt);
+
+        return new String[] {getHash(pString, lSalt), Arrays.toString(lSalt)};
+    }
+
+    public static boolean validate(String pToHash, String pHash, byte[] pSalt)
     {
-            cost = pSalt.length;
-            salt = pSalt;
-    }
-
-    public EncryptionUtils()
-    {
-        cost = 16;
-        SecureRandom random = new SecureRandom();
-        salt = new byte[cost];
-        random.nextBytes(salt);
-    }
-
-    public String hash(String pPassword) {
-
-        KeySpec spec = new PBEKeySpec(pPassword.toCharArray(), salt, 65536, keyLength);
-        String hashedString;
-        try
-        {
-            SecretKeyFactory key_factory = SecretKeyFactory.getInstance(algorithmName);
-            byte[] hash_value = key_factory.generateSecret(spec).getEncoded();
-            Base64.Encoder encoder = Base64.getEncoder();
-            hashedString = encoder.encodeToString(hash_value);
+        try {
+            return pHash.equals(getHash(pToHash, pSalt));
         }
-        catch (Exception ex)
-        {
-            hashedString = ex.getMessage();
-        }
-        return hashedString;
+        catch (Exception ex) { return false; }
     }
-
 }
