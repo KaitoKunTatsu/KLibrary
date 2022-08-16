@@ -11,4 +11,4 @@ This is just a small collection of classes that will help you deal with <br>
 
 ## Getting Started
 
-Add the [JAR](out/artifacts/KLibrary_jar) to your project as it's shown [here](https://stackoverflow.com/questions/1051640/correct-way-to-add-external-jars-lib-jar-to-an-intellij-idea-project)
+Add the [JAR](out/artifacts/KLibrary_jar) to your project as shown [here](https://stackoverflow.com/questions/1051640/correct-way-to-add-external-jars-lib-jar-to-an-intellij-idea-project)
