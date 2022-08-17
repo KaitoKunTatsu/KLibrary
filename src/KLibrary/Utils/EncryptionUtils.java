@@ -98,9 +98,4 @@ private static final char[] CHARACTERS = {'A','B','C','D','E','F','G','H','I','J
         }
         return lIndices;
     }
-
-    public static void main(String[] args) {
-        System.out.println(Arrays.toString(EncryptionUtils.encryptOTP(new char[]{'E', 'F', 'E'}, new char[]{'D', 'D', 'A'})));
-        System.out.println(Arrays.toString(EncryptionUtils.decryptOTP(new char[]{'H', 'I', 'E'}, new char[]{'D', 'D', 'A'})));
-    }
 }
