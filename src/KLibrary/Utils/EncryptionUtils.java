@@ -21,6 +21,9 @@ public class EncryptionUtils {
 
     private static final String ALGORITHM = "PBKDF2WithHmacSHA512";
 
+private static final char[] CHARACTERS = {'A','B','C','D','E','F','G','H','I','J','K','L','M','O','P','Q','R','S','T','U','V','W','X','Y',
+            'Z'};
+
     private static final int SIZE = 512;
 
     private static final SecureRandom random = new SecureRandom();;
@@ -53,5 +56,51 @@ public class EncryptionUtils {
             return pHash.equals(getHash(pToHash, pSalt));
         }
         catch (Exception ex) { return false; }
+    }
+
+    public static char[] encryptOTP(char[] pToEncrypt, char[] pKey) throws IllegalArgumentException
+    {
+        if (pToEncrypt.length != pKey.length) throw new IllegalArgumentException("Message length must be equal to key length");
+
+        char[] lEncrypted = new char[pToEncrypt.length];
+        for (int i = 0; i<lEncrypted.length; i++)
+        {
+            int[] lIndices = searchCharacterIndex(pKey[i], pToEncrypt[i]);
+            lEncrypted[i] = CHARACTERS[(lIndices[0]+lIndices[1])%26];
+        }
+        return lEncrypted;
+    }
+
+    public static char[] decryptOTP(char[] pToDecrypt, char[] pKey) throws IllegalArgumentException
+    {
+        if (pToDecrypt.length != pKey.length) throw new IllegalArgumentException("Message length must be equal to key length");
+
+        char[] lDecrypted = new char[pToDecrypt.length];
+        for (int i = 0; i<lDecrypted.length; i++)
+        {
+            int[] lIndices = searchCharacterIndex(pKey[i], pToDecrypt[i]);
+            int lIndicesSum = lIndices[1]-lIndices[0];
+            if (lIndicesSum < 0) lIndicesSum += CHARACTERS.length;
+            lDecrypted[i] = CHARACTERS[lIndicesSum%26];
+        }
+        return lDecrypted;
+    }
+
+    private static int[] searchCharacterIndex(char... pChar)
+    {
+        int[] lIndices = new int[pChar.length];
+        for (int l = 0; l< pChar.length; l++)
+        {
+            for (int i = 0; i< CHARACTERS.length; i++)
+            {
+                if (CHARACTERS[i] == pChar[l]) lIndices[l] = i;
+            }
+        }
+        return lIndices;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(Arrays.toString(EncryptionUtils.encryptOTP(new char[]{'E', 'F', 'E'}, new char[]{'D', 'D', 'A'})));
+        System.out.println(Arrays.toString(EncryptionUtils.decryptOTP(new char[]{'H', 'I', 'E'}, new char[]{'D', 'D', 'A'})));
     }
 }
