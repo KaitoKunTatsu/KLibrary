@@ -1,7 +1,8 @@
 package KLibrary.Utils;
 
 /**
- * This class includes methods avoiding annoying array problems
+ * This class includes methods avoiding annoying array problems<br>
+ * A part of the KLibrary (https://github.com/KaitoKunTatsu/KLibrary)
  *
  * @version	02.12.2021 (damn I coded trash back then)
  * @author Joshua H. | KaitoKunTatsu#3656

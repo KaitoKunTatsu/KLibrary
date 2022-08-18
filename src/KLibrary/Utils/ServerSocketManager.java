@@ -9,6 +9,13 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class kinda wrapps the {@link ServerSocket} class and provides new methods for handling connected clients <br>
+ * A part of the KLibrary (https://github.com/KaitoKunTatsu/KLibrary)
+ *
+ * @version 18.08.2022
+ * @author Joshua H. | KaitoKunTatsu#3656
+ * */
 public class ServerSocketManager {
 
     private final ServerSocket serverSocket;

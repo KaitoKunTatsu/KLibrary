@@ -3,10 +3,12 @@ package KLibrary.Utils.AbiturKlassenUtils;
 import KLibrary.DataStructures.List;
 
 /**
- * !!! Warnung: Verwende nicht die Abiturklasse "List" der Ladesregierung NRW ohne einen solchen Wrapper !!!
+ * !!! Warnung: Verwende nicht die Abiturklasse "List" der Ladesregierung NRW ohne einen solchen Wrapper !!! <br>
  *
  * Diese Klasse bietet die Möglichkeit, die Abiturklasse List mit weniger Schmerzen zu benutzen.
  * Es gibt keine unerwarteten Funktionen; es werden nur solche ergänzt, die jede Liste haben sollte, aber von der Abiturklasse nicht bereitgestellt werden.
+ *
+ * Außerdem ist diese Klasse teil der KLibrary (https://github.com/KaitoKunTatsu/KLibrary)
  * */
 public class AbiListWrapper<ContentType> {
 

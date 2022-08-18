@@ -3,7 +3,8 @@ package KLibrary.Utils;
 import java.sql.*;
 
 /**
- * This class provides methods for secure SQL statements (preventing SQL-injection)
+ * This class provides methods for secure SQL statements (preventing SQL-injection)<br>
+ * A part of the KLibrary (https://github.com/KaitoKunTatsu/KLibrary)
  *
  * @version 11.08.2022
  * @author Joshua H. | KaitoKunTatsu#3656

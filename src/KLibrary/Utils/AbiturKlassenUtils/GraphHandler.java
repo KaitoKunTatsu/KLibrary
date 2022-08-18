@@ -6,7 +6,8 @@ import KLibrary.DataStructures.Graph.Vertex;
 import KLibrary.DataStructures.List;
 
 /**
- * GraphHandler ist eine Klasse, welche das erstellen und durchsuchen der Abiturklasse {@link KLibrary.DataStructures.Graph} erleichtert.
+ * GraphHandler ist eine Klasse, welche das erstellen und durchsuchen der Abiturklasse {@link KLibrary.DataStructures.Graph} erleichtert. <br>
+ * Diese Klasse ist außerdem teil der KLibrary (https://github.com/KaitoKunTatsu/KLibrary)
  *
  * @version 1.0 | 29.03.2022
  * @author Joshua H. | KaitoKunTatsu#3656
