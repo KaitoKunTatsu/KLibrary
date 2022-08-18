@@ -22,13 +22,13 @@ public class EncryptionUtils {
 
     private static final char[] CHARACTERS = {'A','B','C','D','E','F','G','H','I','J','K','L','M','O','P','Q','R','S','T','U','V','W','X','Y', 'Z'};
 
-    private static final int DEFAULT_COST = 16;
+    private static final int DEFAULT_RSA_KEY_SIZE = 1024;
 
     private static final int DEFAULT_HASH_KEY_SIZE = 512;
 
-    private static final SecureRandom random = new SecureRandom();;
+    private static final int DEFAULT_COST = 16;
 
-    private static final int DEFAULT_RSA_KEY_SIZE = 1024;
+    private static final SecureRandom random = new SecureRandom();
 
     private KeyPair keyPair;
 
@@ -116,7 +116,7 @@ public class EncryptionUtils {
             lGen.initialize(pKeySize);
             keyPair = lGen.generateKeyPair();
         }
-        catch (NoSuchAlgorithmException e) {}
+        catch (NoSuchAlgorithmException ignored) {}
     }
 
     public byte[] encryptRSA(String pMessage, PublicKey pPublicKey) throws NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException
