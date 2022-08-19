@@ -6,9 +6,9 @@ import java.sql.*;
  * This class provides methods for secure SQL statements (preventing SQL-injection)<br>
  * A part of the KLibrary (https://github.com/KaitoKunTatsu/KLibrary)
  *
- * @version 11.08.2022
+ * @version	v1.0.0 | last edit: 19.08.2022
  * @author Joshua H. | KaitoKunTatsu#3656
- * */
+ */
 public class SQLUtils {
 
     private final Connection con;
@@ -19,12 +19,17 @@ public class SQLUtils {
         con.setAutoCommit(false);
     }
 
-    public ResultSet onQuery(String pStatement, String[] set) throws SQLException {
+    /**
+     * @param pStatement SQL statement
+     * @param pSet each ? will be replaced with the content of this array
+     * @return a {@link ResultSet} containing the result of your SQL statement
+     * */
+    public ResultSet onQuery(String pStatement, String[] pSet) throws SQLException {
         stmt = con.prepareStatement(pStatement);
-        if (set != null)
+        if (pSet != null)
         {
-            for (int i = 0; i < set.length; i++) {
-                stmt.setString(i + 1, set[i]);
+            for (int i = 0; i < pSet.length; i++) {
+                stmt.setString(i + 1, pSet[i]);
             }
         }
         ResultSet rs = stmt.executeQuery();
@@ -32,17 +37,25 @@ public class SQLUtils {
         return rs;
     }
 
+    /**
+     * @param pStatement SQL statement
+     * @return a {@link ResultSet} containing the result of your SQL statement
+     * */
     public ResultSet onQuery(String pStatement) throws SQLException {
         return con.createStatement().executeQuery(pStatement);
     }
 
-    public void onExecute(String pStatement, String[] set) throws SQLException {
+    /**
+     * @param pStatement SQL statement you want to execute
+     * @param pSet each ? will be replaced with the content of this array
+     * */
+    public void onExecute(String pStatement, String[] pSet) throws SQLException {
         stmt = con.prepareStatement(pStatement);
-        if (set != null)
+        if (pSet != null)
         {
-            for (int i=0; i < set.length; i++)
+            for (int i=0; i < pSet.length; i++)
             {
-                stmt.setString(i+1, set[i]);
+                stmt.setString(i+1, pSet[i]);
             }
         }
         stmt.execute();
@@ -50,6 +63,9 @@ public class SQLUtils {
         stmt.clearParameters();
     }
 
+    /**
+     * @param pStatement SQL statement you want to execute
+     * */
     public void onExecute(String pStatement) throws SQLException {
         con.createStatement().execute(pStatement);
         con.commit();

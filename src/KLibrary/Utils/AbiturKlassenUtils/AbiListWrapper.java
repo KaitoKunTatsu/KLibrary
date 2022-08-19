@@ -9,7 +9,10 @@ import KLibrary.DataStructures.List;
  * Es gibt keine unerwarteten Funktionen; es werden nur solche ergänzt, die jede Liste haben sollte, aber von der Abiturklasse nicht bereitgestellt werden.
  *
  * Außerdem ist diese Klasse teil der KLibrary (https://github.com/KaitoKunTatsu/KLibrary)
- * */
+ *
+ * @version	v1.0.0 | last edit: 19.08.2022
+ * @author Joshua H. | KaitoKunTatsu#3656
+ */
 public class AbiListWrapper<ContentType> {
 
     private List<ContentType> list;
