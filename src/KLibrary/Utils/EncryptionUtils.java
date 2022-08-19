@@ -32,7 +32,7 @@ public class EncryptionUtils {
 
     private KeyPair keyPair;
 
-    public EncryptionUtils() {keyPair = null;}
+    public EncryptionUtils() { generateKeyPair(); }
 
     // Hash
 
