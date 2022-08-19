@@ -37,7 +37,7 @@ public class Graph{
     }
 
     /**
-     * Die Anfrage liefert eine neue Liste aller Knotenobjekte vom Typ List<Vertex>.
+     * Die Anfrage liefert eine neue Liste aller Knotenobjekte vom Typ List<\Vertex\>.
      */
     public List<Vertex> getVertices(){
         //Eine neue Liste mit allen Vertex-Objekten erstellen.
@@ -54,7 +54,7 @@ public class Graph{
     }
 
     /**
-     * Die Anfrage liefert eine neue Liste aller Kantenobjekte vom Typ List<Edge>.
+     * Die Anfrage liefert eine neue Liste aller Kantenobjekte vom Typ List<\Edge\>.
      */
     public List<Edge> getEdges(){
         //Eine neue Liste mit allen Edge-Objekten erstellen.
@@ -230,7 +230,7 @@ public class Graph{
     }
 
     /**
-     * Die Anfrage liefert alle Nachbarn des Knotens pVertex als neue Liste vom Typ List<Vertex>. Hat der Knoten
+     * Die Anfrage liefert alle Nachbarn des Knotens pVertex als neue Liste vom Typ List<\Vertex\>. Hat der Knoten
      * pVertex keine Nachbarn in diesem Graphen oder ist gar nicht in diesem Graphen enthalten, so
      * wird eine leere Liste zurueckgeliefert.
      * @return
