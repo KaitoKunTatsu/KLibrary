@@ -418,7 +418,6 @@ public class ArrayUtils {
      * 	NOT FINISHED YET
      *
      * 	@param arr	Array
-     * 	@return		Returns arr but sorted
      * */
     public static void quickSort(int[] arr, final int iStart, final int iEnd)
     {
