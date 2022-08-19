@@ -19,6 +19,33 @@
             </plugin>
         </plugins>
     </build>
+    <packaging>jar</packaging>
+
+    <name>KLibrary</name>
+    <description>This is a small collection of classes that will help you deal with SQLite, arrays, encryption, sockets, and classes of the North Rhine-Westphalian government</description>
+    <url>https://github.com/KaitoKunTatsu/KLibrary</url>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>http://www.opensource.org/licenses/mit-license.php</url>
+        </license>
+    </licenses>
+
+    <scm>
+        <connection>scm:git:git://github.com/KaitoKunTatsu/KLibrary.git</connection>
+        <developerConnection>scm:git:ssh://github.com:KaitoKunTatsu/KLibrary.git</developerConnection>
+        <url>https://github.com/KaitoKunTatsu/KLibrary</url>
+    </scm>
+
+    <developers>
+        <developer>
+            <name>Joshua Hartjes</name>
+            <email>kaitokuntatsu@gmail.com</email>
+            <organization>io.github.kaitokuntatsu</organization>
+            <organizationUrl>https://github.com/KaitoKunTatsu/</organizationUrl>
+        </developer>
+    </developers>
 
     <properties>
         <maven.compiler.source>18</maven.compiler.source>
