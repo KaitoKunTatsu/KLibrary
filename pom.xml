@@ -4,9 +4,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>io.github.kaitokuntatsu</groupId>
+    <groupId>org.klibrary</groupId>
     <artifactId>klibrary</artifactId>
     <version>1.0.0</version>
+    <packaging>jar</packaging>
+
     <build>
         <plugins>
             <plugin>
@@ -63,7 +65,6 @@
             </plugin>
         </plugins>
     </build>
-    <packaging>jar</packaging>
 
     <name>KLibrary</name>
     <description>This is a small collection of classes that will help you deal with SQLite, arrays, encryption, sockets, and classes of the North Rhine-Westphalian government</description>
@@ -106,5 +107,4 @@
             <version>3.39.2.0</version>
         </dependency>
     </dependencies>
-
 </project>
