@@ -49,20 +49,6 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-gpg-plugin</artifactId>
-                <version>1.5</version>
-                <executions>
-                    <execution>
-                        <id>sign-artifacts</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>sign</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
         </plugins>
     </build>
 
@@ -84,12 +70,6 @@
             <url>https://maven.pkg.github.com/KaitoKunTats/KLibrary</url>
         </repository>
     </distributionManagement>
-
-    <scm>
-        <connection>scm:git:git://github.com/KaitoKunTatsu/KLibrary.git</connection>
-        <developerConnection>scm:git:ssh://github.com:KaitoKunTatsu/KLibrary.git</developerConnection>
-        <url>https://github.com/KaitoKunTatsu/KLibrary</url>
-    </scm>
 
     <developers>
         <developer>
