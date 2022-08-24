@@ -236,7 +236,7 @@ public class EncryptionUtils {
         }
     }
 
-    public PublicKey getKeyPublicKeyFromString(String pPublicKeyString)
+    public PublicKey getPublicKeyFromString(String pPublicKeyString)
     {
         try
         {
