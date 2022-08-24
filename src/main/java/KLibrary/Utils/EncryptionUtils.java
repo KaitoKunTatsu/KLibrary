@@ -5,6 +5,7 @@ import javax.crypto.spec.PBEKeySpec;
 import java.security.*;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
+import java.security.spec.X509EncodedKeySpec;
 import java.util.Base64;
 
 /**
@@ -209,4 +210,43 @@ public class EncryptionUtils {
 
     public PublicKey getPublicKey() {return keyPair.getPublic();}
 
+    public String getPublicKeyAsString(PublicKey pPublicKey)
+    {
+        return Base64.getEncoder().encodeToString(
+                pPublicKey.getEncoded()
+        );
+    }
+
+    public String getPublicKeyAsString()
+    {
+        return Base64.getEncoder().encodeToString(
+                keyPair.getPublic().getEncoded()
+        );
+    }
+
+    public PublicKey getPublicKeyFromBytes(byte[] pPublicKeyBytes) {
+        try
+        {
+            KeyFactory lFactory = KeyFactory.getInstance("RSA");
+            return lFactory.generatePublic(new X509EncodedKeySpec(pPublicKeyBytes));
+        }
+        catch (InvalidKeySpecException | NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public PublicKey getKeyPublicKeyFromString(String pPublicKeyString)
+    {
+        try
+        {
+            KeyFactory lFactory = KeyFactory.getInstance("RSA");
+            byte[] lKeyAsBytes = Base64.getDecoder().decode(pPublicKeyString);
+            return lFactory.generatePublic(new X509EncodedKeySpec(lKeyAsBytes));
+        }
+        catch (InvalidKeySpecException | NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }
