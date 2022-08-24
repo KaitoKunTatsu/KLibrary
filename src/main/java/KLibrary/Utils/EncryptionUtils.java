@@ -12,7 +12,7 @@ import java.util.Base64;
  * This class provides hash methods and encryption/decryption<br>
  * A part of the KLibrary (https://github.com/KaitoKunTatsu/KLibrary)
  *
- * @version	v1.0.1 | last edit: 23.08.2022
+ * @version	v1.0.2 | last edit: 24.08.2022
  * @author Joshua H. | KaitoKunTatsu#3656
  */
 public class EncryptionUtils {
