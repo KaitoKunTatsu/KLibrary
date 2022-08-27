@@ -1,19 +1,23 @@
 package KLibrary.Utils;
 
 import javax.crypto.*;
+import javax.crypto.spec.GCMParameterSpec;
+import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.PBEKeySpec;
+import javax.crypto.spec.SecretKeySpec;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.security.*;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
 import java.security.spec.X509EncodedKeySpec;
-import java.util.Arrays;
 import java.util.Base64;
 
 /**
  * This class provides hash methods and encryption/decryption<br>
  * A part of the KLibrary (https://github.com/KaitoKunTatsu/KLibrary)
  *
- * @version	v1.0.2 | last edit: 24.08.2022
+ * @version	v1.1.0 | last edit: 27.08.2022
  * @author Joshua H. | KaitoKunTatsu#3656
  */
 public class EncryptionUtils {
@@ -26,13 +30,17 @@ public class EncryptionUtils {
 
     private static final int DEFAULT_HASH_KEY_SIZE = 512;
 
+    private static final int DEFAULT_AES_KEY_SIZE = 192;
+
+    private static final int DATA_LENGTH = 128;
+
     private static final int DEFAULT_COST = 16;
 
     private static final SecureRandom random = new SecureRandom();
 
     private KeyPair keyPair;
 
-    public EncryptionUtils() { generateKeyPair(); }
+    public EncryptionUtils() { generateRSAKeyPair(); }
 
     // Hash
 
@@ -140,18 +148,67 @@ public class EncryptionUtils {
         return lIndices;
     }
 
+    // AES
+
+    public static SecretKey generateSymmetricKey() { return generateSymmetricKey(DEFAULT_AES_KEY_SIZE);}
+
+    public static SecretKey generateSymmetricKey(int pKeySize)
+    {
+        KeyGenerator keyGenerator;
+        try {
+            keyGenerator = KeyGenerator.getInstance("AES");
+        } catch (NoSuchAlgorithmException ignored) {
+            // Won't happen
+            return null;
+        }
+
+        keyGenerator.init(DEFAULT_AES_KEY_SIZE);
+        return keyGenerator.generateKey();
+    }
+
+    public static String encryptAES(String pToDecrypt, SecretKey pKey) throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException, InvalidAlgorithmParameterException {
+        Cipher lCipher;
+        try {
+         lCipher = Cipher.getInstance("AES");
+        } catch (NoSuchAlgorithmException | NoSuchPaddingException ignored) {
+            // Won't happen
+            return null;
+        }
+        lCipher.init(Cipher.ENCRYPT_MODE, pKey);
+        return bytesToString(lCipher.doFinal(pToDecrypt.getBytes()));
+    }
+
+    public static String decryptAES(String pToDecrypt, SecretKey pKey) throws InvalidAlgorithmParameterException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
+        Cipher lCipher;
+        try {
+            lCipher = Cipher.getInstance("AES");
+        } catch (NoSuchAlgorithmException | NoSuchPaddingException ignored) {
+            // Won't happen
+            return null;
+        }
+        lCipher.init(Cipher.DECRYPT_MODE, pKey);
+        byte[] decryptedBytes = lCipher.doFinal(stringToBytes(pToDecrypt));
+        return new String(decryptedBytes);
+    }
+
+    public static SecretKey decodeAESKey(byte[] pKey) {
+        return new SecretKeySpec(pKey, 0, pKey.length, "AES");
+    }
+
+    public static SecretKey decodeAESKey(String pKey){return decodeAESKey(stringToBytes(pKey)); }
+
     // RSA
 
     /**
      *  Generates a new set of key (public and private) used to encrypt/decrypt
      **/
-    public void generateKeyPair() { generateKeyPair(DEFAULT_RSA_KEY_SIZE);}
+    public void generateRSAKeyPair() { generateRSAKeyPair(DEFAULT_RSA_KEY_SIZE);}
 
     /**
      *  Generates a new set of key (public and private) used to encrypt/decrypt
      * @param pKeySize size of the generated keys
      **/
-    public void generateKeyPair(int pKeySize) {
+    public void generateRSAKeyPair(int pKeySize) {
         try
         {
             KeyPairGenerator lGen = KeyPairGenerator.getInstance("RSA");
@@ -203,51 +260,45 @@ public class EncryptionUtils {
         try {
             lCipher = Cipher.getInstance("RSA");
         }
-        catch (NoSuchAlgorithmException ignored) { return null; }
-        lCipher.init(Cipher.DECRYPT_MODE, keyPair.getPrivate());
+        catch (NoSuchAlgorithmException e) {
+            // won't happen
+            return null;
+        }
 
+        lCipher.init(Cipher.DECRYPT_MODE, keyPair.getPrivate());
         return new String(lCipher.doFinal(pEncryptedMessage));
     }
 
     public PublicKey getPublicKey() {return keyPair.getPublic();}
 
-    public String getPublicKeyAsString(PublicKey pPublicKey)
-    {
-        return Base64.getEncoder().encodeToString(
-                pPublicKey.getEncoded()
-        );
-    }
-
-    public String getPublicKeyAsString()
-    {
-        return Base64.getEncoder().encodeToString(
-                keyPair.getPublic().getEncoded()
-        );
-    }
-
-    public PublicKey getPublicKeyFromBytes(byte[] pPublicKeyBytes) {
+    public static PublicKey decodeRSAKey(byte[] pPublicKeyBytes) throws InvalidKeySpecException{
         try
         {
             KeyFactory lFactory = KeyFactory.getInstance("RSA");
             return lFactory.generatePublic(new X509EncodedKeySpec(pPublicKeyBytes));
         }
-        catch (InvalidKeySpecException | NoSuchAlgorithmException e) {
-            e.printStackTrace();
+        catch (NoSuchAlgorithmException e) {
+            // won't happen
             return null;
         }
     }
 
-    public PublicKey getPublicKeyFromString(String pPublicKeyString)
-    {
-        try
-        {
-            KeyFactory lFactory = KeyFactory.getInstance("RSA");
-            byte[] lKeyAsBytes = Base64.getDecoder().decode(pPublicKeyString);
-            return lFactory.generatePublic(new X509EncodedKeySpec(lKeyAsBytes));
-        }
-        catch (InvalidKeySpecException | NoSuchAlgorithmException e) {
-            e.printStackTrace();
-            return null;
-        }
+    public static PublicKey decodeRSAKey(String pPublicKeyString) throws InvalidKeySpecException {
+        return decodeRSAKey(stringToBytes(pPublicKeyString));
     }
+
+    // YEET
+
+    public static String encodeKey(Key pKey) { return bytesToString(pKey.getEncoded()); }
+
+    public static byte[] stringToBytes(String pStr)
+    {
+        return Base64.getDecoder().decode(pStr);
+    }
+
+    public static String bytesToString(byte[] pBytes)
+    {
+        return Base64.getEncoder().encodeToString(pBytes);
+    }
+
 }
