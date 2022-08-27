@@ -8,6 +8,7 @@ This is just a small collection of classes that will help you deal with <br>
 - [encryption](src/KLibrary/Utils/EncryptionUtils.java)
   - OTP
   - RSA
+  - AES
   - Hashing
 - [SQLite](src/KLibrary/Utils/SQLUtils.java)
 - [arrays](src/KLibrary/Utils/ArrayUtils.java)
