@@ -26,13 +26,11 @@ public class EncryptionUtils {
 
     private static final char[] CHARACTERS = {'A','B','C','D','E','F','G','H','I','J','K','L','M','O','P','Q','R','S','T','U','V','W','X','Y', 'Z'};
 
-    private static final int DEFAULT_RSA_KEY_SIZE = 2048;
+    private static final int DEFAULT_RSA_KEY_SIZE = 1024;
 
     private static final int DEFAULT_HASH_KEY_SIZE = 512;
 
-    private static final int DEFAULT_AES_KEY_SIZE = 192;
-
-    private static final int DATA_LENGTH = 128;
+    private static final int DEFAULT_AES_KEY_SIZE = 128;
 
     private static final int DEFAULT_COST = 16;
 
