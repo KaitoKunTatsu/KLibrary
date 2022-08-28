@@ -14,7 +14,7 @@ import java.security.spec.X509EncodedKeySpec;
 import java.util.Base64;
 
 /**
- * This class provides hash methods and encryption/decryption<br>
+ * This class provides RSA, AES and OTP encryption and hashing <br>
  * A part of the KLibrary (https://github.com/KaitoKunTatsu/KLibrary)
  *
  * @version	v1.1.0 | last edit: 27.08.2022
