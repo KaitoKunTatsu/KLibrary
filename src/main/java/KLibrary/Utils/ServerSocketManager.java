@@ -13,7 +13,7 @@ import java.util.List;
  * This class kinda wrapps the {@link ServerSocket} class and provides new methods for handling connected clients <br>
  * A part of the KLibrary (https://github.com/KaitoKunTatsu/KLibrary)
  *
- * @version	v1.0.0 | last edit: 19.08.2022
+ * @version	v1.1.1 | last edit: 19.08.2022
  * @author Joshua H. | KaitoKunTatsu#3656
  */
 public class ServerSocketManager {

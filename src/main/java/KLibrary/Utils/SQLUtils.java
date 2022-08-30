@@ -6,7 +6,7 @@ import java.sql.*;
  * This class provides methods for secure SQL statements (preventing SQL-injection)<br>
  * A part of the KLibrary (https://github.com/KaitoKunTatsu/KLibrary)
  *
- * @version	v1.0.1 | last edit: 23.08.2022
+ * @version	v1.1.1 | last edit: 23.08.2022
  * @author Joshua H. | KaitoKunTatsu#3656
  */
 public class SQLUtils {
