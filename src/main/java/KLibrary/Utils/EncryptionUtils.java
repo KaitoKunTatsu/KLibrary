@@ -1,11 +1,8 @@
 package KLibrary.Utils;
 
 import javax.crypto.*;
-import javax.crypto.spec.GCMParameterSpec;
-import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.SecretKeySpec;
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.security.*;
 import java.security.spec.InvalidKeySpecException;
@@ -188,27 +185,11 @@ public class EncryptionUtils {
         return keyGenerator.generateKey();
     }
 
-    public static String encryptAESToString(String pToEncrypt, SecretKey pKey) throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException, InvalidAlgorithmParameterException {
-        return encryptAESToString(stringToBytes(pToEncrypt), pKey);
+    public static byte[] encryptAES(String pToEncrypt, SecretKey pKey) throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException, InvalidAlgorithmParameterException {
+        return encryptAES(stringToBytes(pToEncrypt), pKey);
     }
 
-    public static String encryptAESToString(byte[] pToEncrypt, SecretKey pKey) throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException, InvalidAlgorithmParameterException {
-        Cipher lCipher;
-        try {
-            lCipher = Cipher.getInstance("AES");
-        } catch (NoSuchAlgorithmException | NoSuchPaddingException ignored) {
-            // Won't happen
-            return null;
-        }
-        lCipher.init(Cipher.ENCRYPT_MODE, pKey);
-        return bytesToString(lCipher.doFinal(pToEncrypt));
-    }
-
-    public static byte[] encryptAESToBytes(String pToEncrypt, SecretKey pKey) throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException, InvalidAlgorithmParameterException {
-        return encryptAESToBytes(stringToBytes(pToEncrypt), pKey);
-    }
-
-    public static byte[] encryptAESToBytes(byte[] pToEncrypt, SecretKey pKey) throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException, InvalidAlgorithmParameterException {
+    public static byte[] encryptAES(byte[] pToEncrypt, SecretKey pKey) throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException, InvalidAlgorithmParameterException {
         Cipher lCipher;
         try {
             lCipher = Cipher.getInstance("AES");
@@ -218,10 +199,6 @@ public class EncryptionUtils {
         }
         lCipher.init(Cipher.ENCRYPT_MODE, pKey);
         return lCipher.doFinal(pToEncrypt);
-    }
-
-    public static String decryptAES(String pToDecrypt, SecretKey pKey) throws InvalidAlgorithmParameterException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
-        return decryptAES(stringToBytes(pToDecrypt), pKey);
     }
 
     public static String decryptAES(byte[] pToDecrypt, SecretKey pKey) throws InvalidAlgorithmParameterException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
@@ -241,7 +218,6 @@ public class EncryptionUtils {
         return new SecretKeySpec(pKey, 0, pKey.length, "AES");
     }
 
-    public static SecretKey decodeAESKey(String pKey){return decodeAESKey(stringToBytes(pKey)); }
 
     // RSA
 
@@ -272,8 +248,8 @@ public class EncryptionUtils {
      * @param pPublicKey the public key of the person you want to send something to
      * @return encrypt byte array version of pMessage
      **/
-    public byte[] encryptRSAToBytes(String pMessage, PublicKey pPublicKey) throws NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException
-    { return encryptRSAToBytes(pMessage.getBytes(), pPublicKey);}
+    public byte[] encryptRSA(String pMessage, PublicKey pPublicKey) throws NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException
+    { return encryptRSA(pMessage.getBytes(), pPublicKey);}
 
     /**
      * Uses the asymmetric RSA algorithm to encrypt a char array
@@ -282,7 +258,7 @@ public class EncryptionUtils {
      * @param pPublicKey the public key of the person you want to send something to
      * @return encrypt byte array version of pMessage
      **/
-    public byte[] encryptRSAToBytes(byte[] pMessage, PublicKey pPublicKey) throws NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException
+    public byte[] encryptRSA(byte[] pMessage, PublicKey pPublicKey) throws NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException
     {
         Cipher lCipher;
         try {
@@ -292,35 +268,6 @@ public class EncryptionUtils {
         lCipher.init(Cipher.ENCRYPT_MODE, pPublicKey);
 
         return lCipher.doFinal(pMessage);
-    }
-
-    /**
-     * Uses the asymmetric RSA algorithm to encrypt a char array
-     *
-     * @param pMessage the string you want to encrypt
-     * @param pPublicKey the public key of the person you want to send something to
-     * @return encrypt byte array version of pMessage
-     **/
-    public String encryptRSAToString(String pMessage, PublicKey pPublicKey) throws NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException
-    { return encryptRSAToString(pMessage.getBytes(), pPublicKey);}
-
-    /**
-     * Uses the asymmetric RSA algorithm to encrypt a char array
-     *
-     * @param pMessage the char array you want to encrypt
-     * @param pPublicKey the public key of the person you want to send something to
-     * @return encrypt byte array version of pMessage
-     **/
-    public String encryptRSAToString(byte[] pMessage, PublicKey pPublicKey) throws NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException
-    {
-        Cipher lCipher;
-        try {
-            lCipher = Cipher.getInstance("RSA");
-        }
-        catch (NoSuchAlgorithmException ignored) { return null; }
-        lCipher.init(Cipher.ENCRYPT_MODE, pPublicKey);
-
-        return bytesToString(lCipher.doFinal(pMessage));
     }
 
     /**
@@ -344,17 +291,6 @@ public class EncryptionUtils {
         return new String(lCipher.doFinal(pEncryptedMessage));
     }
 
-    /**
-     * Uses the asymmetric RSA algorithm to decrypt a message encrypted by using your public key
-     *
-     * @param pEncryptedMessage the string you want to encrypt
-     * @return encrypt string version of pEncryptedMessage
-     **/
-    public String decryptRSA(String pEncryptedMessage) throws NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException
-    {
-        return decryptRSA(stringToBytes(pEncryptedMessage));
-    }
-
     public PublicKey getPublicKey() {return keyPair.getPublic();}
 
     public static PublicKey decodeRSAKey(byte[] pPublicKeyBytes) throws InvalidKeySpecException{
@@ -369,21 +305,15 @@ public class EncryptionUtils {
         }
     }
 
-    public static PublicKey decodeRSAKey(String pPublicKeyString) throws InvalidKeySpecException {
-        return decodeRSAKey(stringToBytes(pPublicKeyString));
-    }
-
     // YEET
-
-    public static String encodeKey(Key pKey) { return bytesToString(pKey.getEncoded()); }
 
     public static byte[] stringToBytes(String pStr)
     {
-        return Base64.getDecoder().decode(pStr);
+        return pStr.getBytes(StandardCharsets.UTF_8);
     }
 
     public static String bytesToString(byte[] pBytes)
     {
-        return Base64.getEncoder().encodeToString(pBytes);
+        return new String(pBytes, StandardCharsets.UTF_8);
     }
 }
