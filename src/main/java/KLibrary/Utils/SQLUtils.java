@@ -6,7 +6,7 @@ import java.sql.*;
  * This class provides methods for secure SQL statements (preventing SQL-injection)<br>
  * A part of the KLibrary (https://github.com/KaitoKunTatsu/KLibrary)
  *
- * @version	v1.1.1 | last edit: 23.08.2022
+ * @version	v1.1.2 | last edit: 07.09.2022
  * @author Joshua H. | KaitoKunTatsu#3656
  */
 public class SQLUtils {
@@ -16,7 +16,7 @@ public class SQLUtils {
 
     public SQLUtils(String pDBPath) throws SQLException {
         con = DriverManager.getConnection("jdbc:sqlite:"+pDBPath);
-        con.setAutoCommit(false);
+        con.setAutoCommit(true);
     }
 
     /**
@@ -84,18 +84,12 @@ public class SQLUtils {
         con.createStatement().execute(pStatement);
         con.commit();
     }
-/*
-    public static void main(String[] args) throws SQLException {
-        SQLUtils sut = new SQLUtils("src/main/java/SQL/kmes.db");
-        sut.onExecute("INSERT INTO User VALUES(?,?,?)", new Object[] {
-                "daddada", 1234, new byte[] {'2','2'}
-        });
-        ResultSet rs = sut.onQuery("SELECT * FROM User");
-        while(rs.next())
-        {
-            System.out.println(rs.getString(1));
-            System.out.println(rs.getString(2));
-            System.out.println(Arrays.toString(rs.getBytes(3)));
-        }
-    }*/
+
+    public void setAutoCommit(boolean pAutoCommitState) throws SQLException {
+        con.setAutoCommit(pAutoCommitState);
+    }
+
+    public boolean getAutoCommitState() throws SQLException {return con.getAutoCommit();}
+
+    public Connection getConnection() { return con; }
 }
