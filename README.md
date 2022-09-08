@@ -5,13 +5,13 @@
 This is just a small collection of classes that will help you deal with <br> 
 - [classes of the North Rhine-Westphalia government](src/KLibrary/Utils/AbiturKlassenUtils/)
   - List
-- [encryption](src/KLibrary/Utils/EncryptionUtils.java)
+- [encryption](src/main/java/KLibrary/Utils/EncryptionUtils.java)
   - OTP
   - RSA
   - AES
   - Hashing
-- [SQLite](src/KLibrary/Utils/SQLUtils.java)
-- [sockets](src/KLibrary/Utils/ServerSocketManager.java)
+- [SQLite](src/main/java/KLibrary/Utils/SQLUtils.java)
+- [sockets](src/main/java/KLibrary/Utils/SocketManager.java)
 
 ## Getting Started
 
