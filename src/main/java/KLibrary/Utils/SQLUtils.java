@@ -4,24 +4,30 @@ import java.sql.*;
 
 /**
  * This class provides methods for secure SQL statements (preventing SQL-injection)<br>
- * A part of the KLibrary (https://github.com/KaitoKunTatsu/KLibrary)
+ * A part of the (<a href="https://github.com/KaitoKunTatsu/KLibrary">KLibrary</a>)
  *
- * @version	v1.1.2 | last edit: 07.09.2022
+ * @version v1.1.2 | last edit: 08.09.2022
  * @author Joshua H. | KaitoKunTatsu#3656
  */
 public class SQLUtils {
 
-    private final Connection con;
+    private Connection con;
     private PreparedStatement stmt;
 
+    /**
+     * Creates an instance of this class and establishes a database connection.
+     *
+     * @param pDBPath   Name or path of the database you want to work with
+     *
+     * @see #setDatabase(String)
+     * */
     public SQLUtils(String pDBPath) throws SQLException {
-        con = DriverManager.getConnection("jdbc:sqlite:"+pDBPath);
-        con.setAutoCommit(true);
+        setDatabase(pDBPath);
     }
 
     /**
      * @param pStatement SQL statement
-     * @param pSet each ? in pStatement will be replaced with the content of this array
+     * @param pSet Each ? in the statment will be replaced with the content of this array
      * @return a {@link ResultSet} containing the result of your SQL statement
      * */
     public ResultSet onQuery(String pStatement, Object... pSet) throws SQLException {
@@ -54,7 +60,7 @@ public class SQLUtils {
 
     /**
      * @param pStatement SQL statement you want to execute
-     * @param pSet each ? will be replaced with the content of this array
+     * @param pSet Each ? in the statment will be replaced with the content of this array
      * */
     public void onExecute(String pStatement, Object... pSet) throws SQLException {
         stmt = con.prepareStatement(pStatement);
@@ -85,11 +91,15 @@ public class SQLUtils {
         con.commit();
     }
 
-    public void setAutoCommit(boolean pAutoCommitState) throws SQLException {
-        con.setAutoCommit(pAutoCommitState);
+    /**
+     * Connects this class to a database.
+     *
+     * @param pDBPath   Name or path of the database
+     * */
+    public void setDatabase(String pDBPath) throws SQLException {
+        con = DriverManager.getConnection("jdbc:sqlite:"+pDBPath);
+        con.setAutoCommit(false);
     }
-
-    public boolean getAutoCommitState() throws SQLException {return con.getAutoCommit();}
 
     public Connection getConnection() { return con; }
 }
