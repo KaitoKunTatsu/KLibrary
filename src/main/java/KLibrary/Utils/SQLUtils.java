@@ -39,9 +39,10 @@ public class SQLUtils {
                 else if (byte[].class.equals(pSet[i].getClass())) stmt.setBytes(i + 1, (byte[]) pSet[i]);
                 else if (byte.class.equals(pSet[i].getClass())) stmt.setByte(i + 1, (byte) pSet[i]);
                 else if (String.class.equals(pSet[i].getClass())) stmt.setString(i + 1, (String) pSet[i]);
-                else if (Integer.class.equals(pSet[i].getClass())) stmt.setInt(i + 1, (Integer) pSet[i]);
-                else if (Boolean.class.equals(pSet[i].getClass())) stmt.setBoolean(i + 1, (Boolean) pSet[i]);
-                else if (Double.class.equals(pSet[i].getClass())) stmt.setDouble(i + 1, (Double) pSet[i]);
+                else if (Integer.class.equals(pSet[i].getClass())) stmt.setInt(i + 1, (int) pSet[i]);
+                else if (Long.class.equals(pSet[i].getClass())) stmt.setLong(i + 1, (long) pSet[i]);
+                else if (Boolean.class.equals(pSet[i].getClass())) stmt.setBoolean(i + 1, (boolean) pSet[i]);
+                else if (Double.class.equals(pSet[i].getClass())) stmt.setDouble(i + 1, (double) pSet[i]);
                 else if (Date.class.equals(pSet[i].getClass())) stmt.setDate(i + 1, (Date) pSet[i]);
             }
         }
@@ -72,9 +73,10 @@ public class SQLUtils {
                 else if (byte[].class.equals(pSet[i].getClass())) stmt.setBytes(i + 1, (byte[]) pSet[i]);
                 else if (byte.class.equals(pSet[i].getClass())) stmt.setByte(i + 1, (byte) pSet[i]);
                 else if (String.class.equals(pSet[i].getClass())) stmt.setString(i + 1, (String) pSet[i]);
-                else if (Integer.class.equals(pSet[i].getClass())) stmt.setInt(i + 1, (Integer) pSet[i]);
-                else if (Boolean.class.equals(pSet[i].getClass())) stmt.setBoolean(i + 1, (Boolean) pSet[i]);
-                else if (Double.class.equals(pSet[i].getClass())) stmt.setDouble(i + 1, (Double) pSet[i]);
+                else if (Integer.class.equals(pSet[i].getClass())) stmt.setInt(i + 1, (int) pSet[i]);
+                else if (Long.class.equals(pSet[i].getClass())) stmt.setLong(i + 1, (long) pSet[i]);
+                else if (Boolean.class.equals(pSet[i].getClass())) stmt.setBoolean(i + 1, (boolean) pSet[i]);
+                else if (Double.class.equals(pSet[i].getClass())) stmt.setDouble(i + 1, (double) pSet[i]);
                 else if (Date.class.equals(pSet[i].getClass())) stmt.setDate(i + 1, (Date) pSet[i]);
             }
         }
