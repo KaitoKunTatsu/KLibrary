@@ -1,6 +1,6 @@
-package KLibrary.DataStructures.Graph;
+package KLibrary.datastructures.Graph;
 
-import KLibrary.DataStructures.List;
+import KLibrary.datastructures.List;
 
 /**
  * <p>

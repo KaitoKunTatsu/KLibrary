@@ -1,4 +1,4 @@
-package KLibrary.Utils;
+package KLibrary.utils;
 
 // Own Library https://github.com/KaitoKunTatsu/KLibrary
 

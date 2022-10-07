@@ -1,4 +1,4 @@
-package KLibrary.DataStructures;
+package KLibrary.datastructures;
 
 /**
  * <p>

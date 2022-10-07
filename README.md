@@ -3,15 +3,15 @@
 ## About The Project
 
 This is just a small collection of classes that will help you deal with <br> 
-- [classes of the North Rhine-Westphalia government](src/main/java/KLibrary/Utils/AbiturKlassenUtils/)
+- [classes of the North Rhine-Westphalia government](src/main/java/KLibrary/utils/AbiturKlassenUtils/)
   - List
-- [encryption](src/main/java/KLibrary/Utils/EncryptionUtils.java)
+- [encryption](src/main/java/KLibrary/utils/EncryptionUtils.java)
   - OTP
   - RSA
   - AES
   - Hashing
-- [SQLite](src/main/java/KLibrary/Utils/SQLUtils.java)
-- [sockets](src/main/java/KLibrary/Utils/SocketWrapper.java) and [server sockets](src/main/java/KLibrary/Utils/ServerSocketWrapper.java)
+- [SQLite](src/main/java/KLibrary/utils/SQLUtils.java)
+- [sockets](src/main/java/KLibrary/utils/SocketWrapper.java) and [server sockets](src/main/java/KLibrary/utils/ServerSocketWrapper.java)
 
 ## Getting Started
 

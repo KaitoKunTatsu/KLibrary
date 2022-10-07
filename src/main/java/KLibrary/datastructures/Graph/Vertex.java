@@ -1,4 +1,4 @@
-package KLibrary.DataStructures.Graph;
+package KLibrary.datastructures.Graph;
 
 /**
  * <p>

@@ -1,6 +1,6 @@
-package KLibrary.Utils.AbiturKlassenUtils;
+package KLibrary.utils.AbiturKlassenUtils;
 
-import KLibrary.DataStructures.List;
+import KLibrary.datastructures.List;
 
 /**
  * !!! Warnung: Verwende nicht die Abiturklasse "List" der Ladesregierung NRW ohne einen solchen Wrapper !!! <br>
