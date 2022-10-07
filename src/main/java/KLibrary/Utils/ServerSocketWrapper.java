@@ -1,7 +1,10 @@
 package KLibrary.Utils;
 
+import javax.crypto.SecretKey;
 import java.io.IOException;
 import java.net.Socket;
+import java.security.PublicKey;
+import java.security.spec.InvalidKeySpecException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeoutException;
@@ -16,12 +19,14 @@ abstract class ServerSocketWrapper {
 
     private final java.net.ServerSocket serverSocket;
     private final List<SocketWrapper> clients;
+    private final EncryptionUtils encryptionUtils;
 
     private boolean accepting;
 
     public ServerSocketWrapper(int pPort) throws IOException
     {
         clients = new ArrayList<>();
+        encryptionUtils = new EncryptionUtils();
         serverSocket = new java.net.ServerSocket(pPort);
         accepting = false;
     }
@@ -49,6 +54,31 @@ abstract class ServerSocketWrapper {
 
     }
 
+    private boolean establishAES(SocketWrapper pClient)
+    {
+        try
+        {
+            byte[] lInput = pClient.readAllBytes();
+            PublicKey lForeignPubKey = EncryptionUtils.decodeRSAKey(lInput);
+            if (lForeignPubKey == null)
+                return false;
+
+            byte[] lEncodedOwnKey = encryptionUtils.getPublicKey().getEncoded();
+            pClient.writeUnencrypted(lEncodedOwnKey);
+
+            lInput = new byte[128];
+            pClient.getInStream().read(lInput);
+            SecretKey lSocketsAESKey = EncryptionUtils.decodeAESKey(
+                    encryptionUtils.decryptRSAToBytes(lInput));
+
+            pClient.setAESKey(lSocketsAESKey);
+
+            return true;
+        }
+        catch(Exception ignored) {}
+        return false;
+    }
+
     private class ClientLifeTimeHandler extends Thread {
 
         private SocketWrapper client;
@@ -57,35 +87,38 @@ abstract class ServerSocketWrapper {
 
         public ClientLifeTimeHandler(SocketWrapper pClient) {
             this.client = pClient;
-            active = false;
-            if (client != null) {
-                active = true;
+            this.active = false;
+            if (this.client != null) {
+                this.active = true;
                 start();
             }
         }
 
         @Override
-        public void run() {
-            while (active)
+        public void run()
+        {
+            if (!establishAES(this.client))
             {
-                try
-                {
-                    String lMessage = client.readAES();
-                    if (lMessage == null)
-                        onReceivingError(client, "unable to decrypt message");
-                    else
-                        onMessage(client, lMessage);
-                }
-                catch (Exception ex) {
-                    onReceivingError(client, ex.getMessage());
-                }
+                client.writeUnencrypted("error:encryption error occcured");
+                this.close();
+                return;
+            }
+
+            while (this.active)
+            {
+                String lMessage = this.client.readAES();
+                if (lMessage == null)
+                    onReceivingError(this.client, "unable to decrypt message");
+                else
+                    onMessage(this.client, lMessage);
             }
         }
 
-        private void close() {
-            active = false;
+        private void close()
+        {
+            this.active = false;
+            this.client.close();
             clients.remove(client);
-            client.close();
         }
     }
 

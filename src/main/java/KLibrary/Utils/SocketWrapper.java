@@ -48,24 +48,44 @@ class SocketWrapper {
         this(pSocket, null);
     }
 
-    protected void writeAES(String pMessage) throws InvalidAlgorithmParameterException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException, IOException {
-        if (AESKey == null) return;
+    public boolean writeAES(String pMessage)
+    {
+        if (AESKey == null) return false;
 
-        byte[] lEncrpytedMessage = EncryptionUtils.encryptAES(pMessage, AESKey);
-        byte[] lMessageSizeAsBytes = ByteBuffer.allocate(4).putInt(lEncrpytedMessage.length).array();
-        byte[] lConcatenated = ByteBuffer.allocate(lMessageSizeAsBytes.length+lEncrpytedMessage.length).put(lMessageSizeAsBytes).put(lEncrpytedMessage).array();
-        writer.write(lConcatenated, 0, lConcatenated.length);
+        try
+        {
+            byte[] lEncrpytedMessage = EncryptionUtils.encryptAES(pMessage, AESKey);
+            byte[] lMessageSizeAsBytes = ByteBuffer.allocate(4).putInt(lEncrpytedMessage.length).array();
+            byte[] lConcatenated = ByteBuffer.allocate(lMessageSizeAsBytes.length+lEncrpytedMessage.length).put(lMessageSizeAsBytes).put(lEncrpytedMessage).array();
+            writer.write(lConcatenated, 0, lConcatenated.length);
+            return true;
+        }
+        catch (IllegalArgumentException | InvalidKeyException | IllegalBlockSizeException | BadPaddingException |
+               InvalidAlgorithmParameterException | IOException ex) {
+            return false;
+        }
     }
 
-    protected void writeUnencrypted(String pMessage) throws IOException {
-        writer.writeUTF(pMessage);
+    public boolean writeUnencrypted(String pMessage)
+    {
+        try {
+            writer.writeUTF(pMessage);
+            return true;
+        }
+        catch(IOException ioEx) {return false;}
     }
 
-    protected void writeUnencrypted(byte[] pMessage) throws IOException {
-        writer.write(pMessage);
+    public boolean writeUnencrypted(byte[] pMessage)
+    {
+        try {
+            writer.write(pMessage);
+            return true;
+        }
+        catch(IOException ioEx) {return false;}
     }
 
-    public byte[] readAllBytes() throws IOException {
+    public byte[] readAllBytes()
+    {
         try
         {
             int lSize = reader.readInt();
@@ -76,12 +96,12 @@ class SocketWrapper {
 
             return lInput;
         }
-        catch(SocketException socketException) {close(); return null;}
+        catch(IOException ioEx) {return null;}
     }
 
-    public String readAES() throws IOException
+    public String readAES()
     {
-        if (AESKey == null) return "";
+        if (AESKey == null) return null;
 
         try
         {
@@ -93,11 +113,12 @@ class SocketWrapper {
 
             return EncryptionUtils.decryptAES(lEncryptedInput, AESKey);
         }
-        catch (IllegalBlockSizeException | BadPaddingException | InvalidKeyException | InvalidAlgorithmParameterException ex) {return null;}
-        catch(SocketException socketException) {close(); return null;}
+        catch (IllegalBlockSizeException | BadPaddingException | InvalidKeyException |
+               InvalidAlgorithmParameterException | IOException ex) {return null;}
     }
 
-    protected void close() {
+    public void close()
+    {
         try
         {
             reader.close();
@@ -112,15 +133,15 @@ class SocketWrapper {
         }
     }
 
-    protected void setAESKey(SecretKey pKey) { AESKey = pKey; }
+    public void setAESKey(SecretKey pKey) { AESKey = pKey; }
 
-    protected boolean isClosed() { return client == null || client.isClosed();}
+    public boolean isClosed() { return client == null || client.isClosed();}
 
-    protected SecretKey getAESKey() {return AESKey;}
+    public SecretKey getAESKey() {return AESKey;}
 
-    protected Socket getSocket() {return client;}
+    public Socket getSocket() {return client;}
 
-    protected DataOutputStream getOutStream() {return writer;}
+    public DataOutputStream getOutStream() {return writer;}
 
-    protected DataInputStream getInStream() {return reader;}
+    public DataInputStream getInStream() {return reader;}
 }
