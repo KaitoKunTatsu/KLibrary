@@ -12,7 +12,7 @@ import java.util.List;
  * @version 3.0.0 | last edit: 07.10.2022
  * @author Joshua H. | KaitoKunTatsu#3656
  * */
-abstract class ServerSocketWrapper {
+public abstract class ServerSocketWrapper {
 
     private final java.net.ServerSocket serverSocket;
     private final List<SocketWrapper> clients;
