@@ -4,6 +4,7 @@ package KLibrary.Utils;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -13,6 +14,9 @@ import java.net.SocketException;
 import java.nio.ByteBuffer;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
+import java.security.PublicKey;
+import java.security.spec.InvalidKeySpecException;
+import java.util.Arrays;
 
 /**
  * This class wraps a {@link Socket} and provides read, write, etc. methods
@@ -25,8 +29,9 @@ class SocketWrapper {
     private Socket client;
     private DataInputStream reader;
     private DataOutputStream writer;
-
     private SecretKey AESKey;
+
+    private final EncryptionUtils encryptionUtils;
 
     /**
      * @param pSocket Socket to wrap
@@ -36,7 +41,7 @@ class SocketWrapper {
     {
         client = pSocket;
         AESKey = pAESKey;
-
+        encryptionUtils = new EncryptionUtils();
         try {
             reader = new DataInputStream(client.getInputStream());
             writer = new DataOutputStream(client.getOutputStream());
@@ -46,6 +51,33 @@ class SocketWrapper {
 
     public SocketWrapper(Socket pSocket) throws IOException {
         this(pSocket, null);
+    }
+
+    public SocketWrapper(String pIp, int pPort, SecretKey pAESKey) throws IOException {
+        this(new Socket(pIp, pPort),pAESKey);
+    }
+
+    public SocketWrapper(String pIp, int pPort) throws IOException {
+        this(new Socket(pIp, pPort), null);
+    }
+
+    public void establishAES() throws IOException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException, InvalidKeySpecException
+    {
+        if (AESKey != null) return;
+        // RSA
+        byte[] lEncodedRSAKey = encryptionUtils.getPublicKey().getEncoded();
+        writer.writeInt(lEncodedRSAKey.length);
+        writer.write(lEncodedRSAKey);
+
+        byte[] lKeyBytes = readAllBytes();
+        PublicKey lServerRSAKey = EncryptionUtils.decodeRSAKey(lKeyBytes);
+
+        // AES
+        AESKey = EncryptionUtils.generateSymmetricKey();
+        byte[] lEncryptedAESKey = encryptionUtils.encryptRSA(AESKey.getEncoded(), lServerRSAKey);
+
+        writer.writeInt(lEncryptedAESKey.length);
+        writer.write(lEncryptedAESKey);
     }
 
     public boolean writeAES(String pMessage)
@@ -114,7 +146,7 @@ class SocketWrapper {
             return EncryptionUtils.decryptAES(lEncryptedInput, AESKey);
         }
         catch (IllegalBlockSizeException | BadPaddingException | InvalidKeyException |
-               InvalidAlgorithmParameterException | IOException ex) {return null;}
+               InvalidAlgorithmParameterException | IOException ex) {ex.printStackTrace();return null;}
     }
 
     public void close()
@@ -144,4 +176,10 @@ class SocketWrapper {
     public DataOutputStream getOutStream() {return writer;}
 
     public DataInputStream getInStream() {return reader;}
+
+    public static void main(String[] args) throws IOException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, InvalidKeySpecException, InvalidKeyException {
+        SocketWrapper sut = new SocketWrapper("localhost", 80);
+        sut.establishAES();
+        sut.writeAES("Test!");
+    }
 }

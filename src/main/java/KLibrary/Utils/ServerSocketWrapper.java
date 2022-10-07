@@ -3,9 +3,11 @@ package KLibrary.Utils;
 import javax.crypto.SecretKey;
 import java.io.IOException;
 import java.net.Socket;
+import java.net.SocketException;
 import java.security.PublicKey;
 import java.security.spec.InvalidKeySpecException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeoutException;
 
@@ -40,7 +42,7 @@ abstract class ServerSocketWrapper {
         {
             try
             {
-                while (true)
+                while (accepting)
                 {
                     final SocketWrapper lNewClient = new SocketWrapper(serverSocket.accept());
                     clients.add(lNewClient);
@@ -64,28 +66,26 @@ abstract class ServerSocketWrapper {
                 return false;
 
             byte[] lEncodedOwnKey = encryptionUtils.getPublicKey().getEncoded();
+            pClient.getOutStream().writeInt(lEncodedOwnKey.length);
             pClient.writeUnencrypted(lEncodedOwnKey);
 
-            lInput = new byte[128];
-            pClient.getInStream().read(lInput);
-            SecretKey lSocketsAESKey = EncryptionUtils.decodeAESKey(
-                    encryptionUtils.decryptRSAToBytes(lInput));
-
+            lInput = pClient.readAllBytes();
+            SecretKey lSocketsAESKey = EncryptionUtils.decodeAESKey(encryptionUtils.decryptRSAToBytes(lInput));
             pClient.setAESKey(lSocketsAESKey);
 
             return true;
         }
-        catch(Exception ignored) {}
-        return false;
+        catch(Exception ex) {ex.printStackTrace();return false;}
     }
 
-    private class ClientLifeTimeHandler extends Thread {
-
-        private SocketWrapper client;
+    private class ClientLifeTimeHandler extends Thread
+    {
+        private final SocketWrapper client;
 
         private boolean active;
 
-        public ClientLifeTimeHandler(SocketWrapper pClient) {
+        public ClientLifeTimeHandler(SocketWrapper pClient)
+        {
             this.client = pClient;
             this.active = false;
             if (this.client != null) {
@@ -108,7 +108,7 @@ abstract class ServerSocketWrapper {
             {
                 String lMessage = this.client.readAES();
                 if (lMessage == null)
-                    onReceivingError(this.client, "unable to decrypt message");
+                    this.close();
                 else
                     onMessage(this.client, lMessage);
             }
@@ -119,6 +119,7 @@ abstract class ServerSocketWrapper {
             this.active = false;
             this.client.close();
             clients.remove(client);
+            onClientDisconnect(client);
         }
     }
 
