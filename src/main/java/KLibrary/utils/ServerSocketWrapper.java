@@ -28,7 +28,7 @@ public abstract class ServerSocketWrapper {
         accepting = false;
     }
 
-    private void acceptSockets()
+    public void acceptSockets()
     {
         if (accepting) return;
 
@@ -124,9 +124,9 @@ public abstract class ServerSocketWrapper {
 
     public abstract void onMessage(SocketWrapper pClient, String pMessage);
 
-    public abstract void onReceivingError(SocketWrapper pClient, String pErrorMessage);
-
     public java.net.ServerSocket getServerSocket() {return serverSocket;}
 
     public List<SocketWrapper> getClients() {return clients;}
+
+    public void stopAcceptingSockets() {accepting = false;}
 }

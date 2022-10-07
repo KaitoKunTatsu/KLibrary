@@ -23,7 +23,7 @@ import java.security.spec.InvalidKeySpecException;
  * @version 3.0.0 | last edit: 07.10.2022
  * @author Joshua H. | KaitoKunTatsu#3656
  * */
-class SocketWrapper {
+public class SocketWrapper {
 
     private Socket client;
     private DataInputStream reader;
