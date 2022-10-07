@@ -2,19 +2,14 @@ package KLibrary.Utils;
 
 import javax.crypto.SecretKey;
 import java.io.IOException;
-import java.net.Socket;
-import java.net.SocketException;
 import java.security.PublicKey;
-import java.security.spec.InvalidKeySpecException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.TimeoutException;
 
 /**
  * Thread accepting new clients connecting to the KMes Server
  *
- * @version	v1.1.1 | last edit: 06.10.2022
+ * @version 3.0.0 | last edit: 07.10.2022
  * @author Joshua H. | KaitoKunTatsu#3656
  * */
 abstract class ServerSocketWrapper {

@@ -16,12 +16,11 @@ import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.PublicKey;
 import java.security.spec.InvalidKeySpecException;
-import java.util.Arrays;
 
 /**
  * This class wraps a {@link Socket} and provides read, write, etc. methods
  *
- * @version v2.0.0 | last edit: 26.09.2022
+ * @version 3.0.0 | last edit: 07.10.2022
  * @author Joshua H. | KaitoKunTatsu#3656
  * */
 class SocketWrapper {
