@@ -11,7 +11,7 @@ This is just a small collection of classes that will help you deal with <br>
   - AES
   - Hashing
 - [SQLite](src/main/java/KLibrary/Utils/SQLUtils.java)
-- [sockets](src/main/java/KLibrary/Utils/SocketManager.java)
+- [sockets](src/main/java/KLibrary/Utils/SocketWrapper.java) and [server sockets](src/main/java/KLibrary/Utils/ServerSocketWrapper.java)
 
 ## Getting Started
 
