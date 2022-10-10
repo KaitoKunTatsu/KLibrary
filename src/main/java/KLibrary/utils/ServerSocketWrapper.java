@@ -102,7 +102,10 @@ public abstract class ServerSocketWrapper {
             {
                 String lMessage = this.client.readAES();
                 if (lMessage == null)
+                {
                     this.close();
+                    onClientDisconnect(client);
+                }
                 else
                     onMessage(this.client, lMessage);
             }
@@ -113,7 +116,6 @@ public abstract class ServerSocketWrapper {
             this.active = false;
             this.client.close();
             clients.remove(client);
-            onClientDisconnect(client);
         }
     }
 
