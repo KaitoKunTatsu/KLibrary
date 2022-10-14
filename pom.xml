@@ -6,7 +6,7 @@
 
     <groupId>com</groupId>
     <artifactId>klibrary</artifactId>
-    <version>3.0.2</version>
+    <version>stable-1.0.0</version>
     <packaging>jar</packaging>
 
     <build>

@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Thread accepting new clients connecting to the KMes Server
  *
- * @version 3.0.1 | last edit: 10.10.2022
+ * @version stable-1.0.0 | last edit: 10.10.2022
  * @author Joshua H. | KaitoKunTatsu#3656
  * */
 public abstract class ServerSocketWrapper {
