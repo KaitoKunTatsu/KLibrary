@@ -89,15 +89,15 @@ public class SQLUtils {
     /**
      * Connects this class to a database.
      *
-     * @param pDBPath   Name or path of the database
+     * @param pSQLiteFilePath   Name or path of the database
      * */
-    public void setDatabase(String pDBPath) throws SQLException {
-        con = DriverManager.getConnection("jdbc:sqlite:"+pDBPath);
+    public void setDatabase(String pSQLiteFilePath) throws SQLException {
+        con = DriverManager.getConnection("jdbc:sqlite:"+pSQLiteFilePath);
         con.setAutoCommit(false);
     }
 
     public void setDatabase(String pDatabaseUrl, String pUser, String pPassword) throws SQLException {
-        con = DriverManager.getConnection("jdbc:sqlite:"+pDatabaseUrl, pUser, pPassword);
+        con = DriverManager.getConnection(pDatabaseUrl, pUser, pPassword);
         con.setAutoCommit(false);
     }
 
