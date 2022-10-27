@@ -3,7 +3,7 @@
 ## About The Project
 
 This is just a small collection of classes that will help you deal with <br> 
-- [classes of the North Rhine-Westphalia government](src/main/java/KLibrary/utils/AbiturKlassenUtils/)
+- [classes of the North Rhine-Westphalia government](src/main/java/KLibrary/wrapper/AbiturKlassenUtils/)
   - List
 - [encryption](src/main/java/KLibrary/utils/EncryptionUtils.java)
   - OTP
@@ -11,7 +11,8 @@ This is just a small collection of classes that will help you deal with <br>
   - AES
   - Hashing
 - [databases](src/main/java/KLibrary/utils/SQLUtils.java)
-- [sockets](src/main/java/KLibrary/utils/SocketWrapper.java) and [server sockets](src/main/java/KLibrary/utils/ServerSocketWrapper.java)
+- [sockets](src/main/java/KLibrary/wrapper/SocketWrapper.java) and [server sockets](src/main/java/KLibrary/wrapper/ServerSocketWrapper.java)
+- [system paths](src/main/java/KLibrary/utils/SystemUtils.java)
 
 ## Getting Started
 
