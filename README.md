@@ -10,7 +10,7 @@ This is just a small collection of classes that will help you deal with <br>
   - RSA
   - AES
   - Hashing
-- [SQLite](src/main/java/KLibrary/utils/SQLUtils.java)
+- [databases](src/main/java/KLibrary/utils/SQLUtils.java)
 - [sockets](src/main/java/KLibrary/utils/SocketWrapper.java) and [server sockets](src/main/java/KLibrary/utils/ServerSocketWrapper.java)
 
 ## Getting Started
