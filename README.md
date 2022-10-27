@@ -3,6 +3,9 @@
 ## About The Project
 
 This is just a small collection of classes that will help you deal with <br> 
+- [system paths](src/main/java/KLibrary/utils/SystemUtils.java)
+- [databases](src/main/java/KLibrary/utils/SQLUtils.java)
+- [sockets](src/main/java/KLibrary/wrapper/SocketWrapper.java) and [server sockets](src/main/java/KLibrary/wrapper/ServerSocketWrapper.java)
 - classes of the North Rhine-Westphalia government
   - [List](src/main/java/KLibrary/wrapper/AbiturKlassenUtils/AbiListWrapper.java)
   - [Graphs](src/main/java/KLibrary/utils/AbiturKlassenUtils/GraphHandler.java)
@@ -11,9 +14,6 @@ This is just a small collection of classes that will help you deal with <br>
   - RSA
   - AES
   - Hashing
-- [databases](src/main/java/KLibrary/utils/SQLUtils.java)
-- [sockets](src/main/java/KLibrary/wrapper/SocketWrapper.java) and [server sockets](src/main/java/KLibrary/wrapper/ServerSocketWrapper.java)
-- [system paths](src/main/java/KLibrary/utils/SystemUtils.java)
 
 ## Getting Started
 
