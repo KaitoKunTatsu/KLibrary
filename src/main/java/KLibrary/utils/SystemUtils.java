@@ -1,10 +1,12 @@
 package KLibrary.utils;
 
+import java.io.File;
+
 /**
- * This class provides methods for secure SQL statements (preventing SQL-injection)<br>
+ * This class provides methods for OS dependent pathsa and directory creation <br>
  * A part of the (<a href="https://github.com/KaitoKunTatsu/KLibrary">KLibrary</a>)
  *
- * @version stable-1.1.0 | last edit: 27.10.2022
+ * @version stable-1.1.0 | last edit: 28.10.2022
  * @author Joshua H. | KaitoKunTatsu#3656
  */
 public class SystemUtils {
@@ -29,6 +31,14 @@ public class SystemUtils {
             lPath += "\\AppData\\Roaming";
 
         return lPath;
+    }
+
+    public static boolean createDirIfNotExists(String lDirPath)
+    {
+        File lFile = new File(lDirPath);
+        if (!lFile.exists())
+            return lFile.mkdir();
+        return true;
     }
 
     public static String getOSName() {
