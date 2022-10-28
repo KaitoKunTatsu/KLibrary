@@ -11,6 +11,12 @@ import java.io.File;
  */
 public class SystemUtils {
 
+    /**
+     * Gets the path to the directory for local applications
+     * Supports Windows, Linux and macOS.
+     *
+     * @return Directory path for local application
+     * */
     public static String getLocalApplicationPath()
     {
         String lPath = System.getProperty("user.home");
@@ -22,6 +28,13 @@ public class SystemUtils {
         return lPath;
     }
 
+
+    /**
+     * Gets the path to the directory for roaming applications.
+     * Supports Windows, Linux and macOS.
+     *
+     * @return Directory path for local application
+     * */
     public static String getRoamingApplicationPath()
     {
         String lPath = System.getProperty("user.home");
@@ -33,6 +46,11 @@ public class SystemUtils {
         return lPath;
     }
 
+    /**
+     * Creates a directory if it doesn't already exist.
+     *
+     * @return true if directory already exists or was successfully created; false if directory creation failed
+     * */
     public static boolean createDirIfNotExists(String lDirPath)
     {
         File lFile = new File(lDirPath);
@@ -41,18 +59,31 @@ public class SystemUtils {
         return true;
     }
 
+    /**
+     * @return Name of your operating system
+     * */
     public static String getOSName() {
         return System.getProperty("os.name");
     }
 
+    /**
+     * @return true if {@link #getOSName()} returns a version of Linux
+     * */
     public static boolean isLinux() {
         return getOSName().startsWith("Linux");
     }
 
+    /**
+     * @return true if {@link #getOSName()} returns a version of macOS
+     * */
     public static boolean isMacOS() {
         return getOSName().startsWith("Mac OS");
     }
 
+
+    /**
+     * @return true if {@link #getOSName()} returns a version of Windows
+     * */
     public static boolean isWindows() {
         return getOSName().startsWith("Windows");
     }

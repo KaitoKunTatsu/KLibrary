@@ -16,7 +16,7 @@ public class SQLUtils {
     /**
      * Creates an instance of this class and establishes a database connection.
      *
-     * @param pDBPath   Name or path of the database you want to work with
+     * @param pDBPath Path to SQLite database you want to connect to
      *
      * @see #setDatabase(String)
      * */
@@ -24,8 +24,18 @@ public class SQLUtils {
         setDatabase(pDBPath);
     }
 
-    public SQLUtils(String pDatabaseUrl, String pUser, String pPassword) throws SQLException {
-        setDatabase(pDatabaseUrl, pUser, pPassword);
+
+    /**
+     * Creates an instance of this class and establishes a database connection.
+     *
+     * @param pDatabaseUrl  Host address
+     * @param pUsername     Name of the user you want to connect as
+     * @param pPassword     Password
+     *
+     * @see #setDatabase(String)
+     * */
+    public SQLUtils(String pDatabaseUrl, String pUsername, String pPassword) throws SQLException {
+        setDatabase(pDatabaseUrl, pUsername, pPassword);
     }
 
     private PreparedStatement addStatementVariables(String pStatement, Object... pSet) throws SQLException
@@ -87,7 +97,7 @@ public class SQLUtils {
     }
 
     /**
-     * Connects this class to a database.
+     * Connects this class to an SQLite database.
      *
      * @param pSQLiteFilePath   Name or path of the database
      * */
@@ -96,8 +106,15 @@ public class SQLUtils {
         con.setAutoCommit(false);
     }
 
-    public void setDatabase(String pDatabaseUrl, String pUser, String pPassword) throws SQLException {
-        con = DriverManager.getConnection(pDatabaseUrl, pUser, pPassword);
+    /**
+     * Connects this class to a database.
+     *
+     * @param pDatabaseUrl  Host address
+     * @param pUsername     Name of the user you want to connect as
+     * @param pPassword     Password
+     * */
+    public void setDatabase(String pDatabaseUrl, String pUsername, String pPassword) throws SQLException {
+        con = DriverManager.getConnection(pDatabaseUrl, pUsername, pPassword);
         con.setAutoCommit(false);
     }
 
