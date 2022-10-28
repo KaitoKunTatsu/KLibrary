@@ -6,7 +6,7 @@ import java.io.File;
  * This class provides methods for OS dependent pathsa and directory creation <br>
  * A part of the (<a href="https://github.com/KaitoKunTatsu/KLibrary">KLibrary</a>)
  *
- * @version stable-1.1.0 | last edit: 28.10.2022
+ * @version stable-1.1.1 | last edit: 28.10.2022
  * @author Joshua H. | KaitoKunTatsu#3656
  */
 public class SystemUtils {
@@ -27,7 +27,6 @@ public class SystemUtils {
 
         return lPath;
     }
-
 
     /**
      * Gets the path to the directory for roaming applications.
