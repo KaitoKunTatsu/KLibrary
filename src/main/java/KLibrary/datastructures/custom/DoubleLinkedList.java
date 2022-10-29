@@ -31,7 +31,7 @@ public class DoubleLinkedList <T> {
 
     public void addBeforeCursor(T pContent) {
         if (head == null)
-            addAsHead(pContent);
+            addFirstElement(pContent);
         else if (cursor != null) {
             DLLNode lNextNode = new DLLNode(pContent, cursor.getPreviousNode(), cursor);
             if (cursor.getPreviousNode() != null)
@@ -43,7 +43,7 @@ public class DoubleLinkedList <T> {
 
     public void addAfterCursor(T pContent) {
         if (head == null)
-            addAsHead(pContent);
+            addFirstElement(pContent);
         else if (cursor != null) {
             DLLNode lNextNode = new DLLNode(pContent, cursor, cursor.getNextNode());
             if (cursor.getNextNode() != null)
@@ -54,11 +54,12 @@ public class DoubleLinkedList <T> {
     }
 
     public void appendFirst(T pContent) {
-        if (head == null)
-            addAsHead(pContent);
+        if (size == 0)
+            addFirstElement(pContent);
         else {
             DLLNode lNewNode = new DLLNode(pContent, null, head);
-            reasignCursorIfHeadOrTail(lNewNode);
+            if (cursor.equals(head))
+                cursor = lNewNode;
             head.setPreviousNode(lNewNode);
             head = lNewNode;
         }
@@ -66,25 +67,19 @@ public class DoubleLinkedList <T> {
     }
 
     public void appendLast(T pContent) {
-        if (head == null)
-            addAsHead(pContent);
+        if (size == 0)
+            addFirstElement(pContent);
         else {
             DLLNode lNewNode = new DLLNode(pContent, tail, null);
-            reasignCursorIfHeadOrTail(lNewNode);
+            if (cursor.equals(tail) && size > 1)
+                cursor = lNewNode;
             tail.setNextNode(lNewNode);
             tail = lNewNode;
         }
         ++size;
     }
 
-    private void reasignCursorIfHeadOrTail(DLLNode pNewCursorNode) {
-        if (cursor.equals(head))
-            cursor = pNewCursorNode;
-        else if (cursor.equals(tail))
-            cursor = pNewCursorNode;
-    }
-
-    private void addAsHead(T pContent) {
+    private void addFirstElement(T pContent) {
         head = new DLLNode(pContent, null, null);
         tail = head;
         cursor = head;
@@ -94,7 +89,7 @@ public class DoubleLinkedList <T> {
         if (pAmount <= 0) return;
         if (cursor == null) cursor = head;
 
-        for (int i = 1; i < pAmount && cursor != null; ++i) {
+        for (int i = 0; i < pAmount && cursor != null; ++i) {
             moveCursorForward();
         }
     }
@@ -120,6 +115,32 @@ public class DoubleLinkedList <T> {
             cursor = cursor.getPreviousNode();
         else
             cursor = tail;
+    }
+
+    public void removeElementAtCursor() {
+        if (cursor == null) return;
+
+        if (cursor.getNextNode() == null && cursor.getPreviousNode() == null) {
+            cursor = null;
+            head = null;
+            tail = null;
+        }
+        else if (cursor.getNextNode() != null && cursor.getPreviousNode() != null) {
+            cursor.getPreviousNode().setNextNode(cursor.getNextNode());
+            cursor.getNextNode().setPreviousNode(cursor.getPreviousNode());
+            cursor = cursor.getPreviousNode();
+        }
+        else if (cursor.getNextNode() == null) {
+            cursor.getPreviousNode().setNextNode(null);
+            cursor = cursor.getPreviousNode();
+            tail = cursor;
+        }
+        else {
+            cursor.getNextNode().setPreviousNode(null);
+            cursor = cursor.getNextNode();
+            head = cursor;
+        }
+        --size;
     }
 
     public void toFirst() {
@@ -189,5 +210,4 @@ public class DoubleLinkedList <T> {
             return this.nextNode;
         }
     }
-
 }
