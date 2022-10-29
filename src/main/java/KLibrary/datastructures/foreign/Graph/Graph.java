@@ -1,6 +1,6 @@
-package KLibrary.datastructures.Graph;
+package KLibrary.datastructures.foreign.Graph;
 
-import KLibrary.datastructures.List;
+import KLibrary.datastructures.foreign.List;
 
 /**
  * <p>

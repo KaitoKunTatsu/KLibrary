@@ -1,6 +1,6 @@
 package KLibrary.wrapper.AbiturKlassenUtils;
 
-import KLibrary.datastructures.List;
+import KLibrary.datastructures.foreign.List;
 
 /**
  * !!! Warnung: Verwende nicht die Abiturklasse "List" der Ladesregierung NRW ohne einen solchen Wrapper !!! <br>
