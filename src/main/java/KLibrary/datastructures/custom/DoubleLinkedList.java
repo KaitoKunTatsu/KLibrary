@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * (<a href="https://github.com/KaitoKunTatsu/KLibrary">KLibrary</a>)
  *
- * @version stable-1.2.0 | last edit: 29.10.2022
+ * @version 1.2.0 | last edit: 29.10.2022
  * @author Joshua H. | KaitoKunTatsu#3656
  */
 public class DoubleLinkedList <T> {

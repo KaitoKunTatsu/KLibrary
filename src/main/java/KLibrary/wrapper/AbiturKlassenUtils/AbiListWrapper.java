@@ -10,7 +10,7 @@ import KLibrary.datastructures.foreign.List;
  *
  * Außerdem ist diese Klasse teil der KLibrary (https://github.com/KaitoKunTatsu/KLibrary)
  *
- * @version	v1.0.0 | last edit: 19.08.2022
+ * @version	1.2.0 | last edit: 19.08.2022
  * @author Joshua H. | KaitoKunTatsu#3656
  */
 public class AbiListWrapper<ContentType> {

@@ -14,7 +14,7 @@ import java.util.Base64;
  * This class provides RSA, AES and OTP encryption and hashing <br>
  * (<a href="https://github.com/KaitoKunTatsu/KLibrary">KLibrary</a>)
  *
- * @version	1.1.1 | last edit: 08.09.2022
+ * @version	1.2.0 | last edit: 08.09.2022
  * @author Joshua H. | KaitoKunTatsu#3656
  */
 public class EncryptionUtils {
