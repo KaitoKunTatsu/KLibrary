@@ -1,5 +1,6 @@
 package KLibrary.datastructures.custom;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,6 +24,11 @@ public class DoubleLinkedList <T> {
         this.size = 0;
     }
 
+    /**
+     * Creates a list
+     *
+     * @param pListToCopy   List whose elements are taken over
+     * */
     public DoubleLinkedList(List<T> pListToCopy) {
         this();
         for (T element : pListToCopy)
