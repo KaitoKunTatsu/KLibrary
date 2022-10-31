@@ -52,14 +52,14 @@
         </plugins>
     </build>
 
-    <name>KLibrary</name>
-    <description>This is a small collection of classes that will help you deal with SQLite, arrays, encryption, sockets, and classes of the North Rhine-Westphalian government</description>
+    <name>${project.groupId}:${project.artifactId}</name>
+    <description>This is a small collection of classes that provide methods for improved handling of databases, encryption, sockets and classes of the north rhine-westphalian government.</description>
     <url>https://github.com/KaitoKunTatsu/KLibrary</url>
 
     <licenses>
         <license>
             <name>MIT License</name>
-            <url>http://www.opensource.org/licenses/mit-license.php</url>
+            <url>https://www.opensource.org/licenses/mit-license.php</url>
         </license>
     </licenses>
 
@@ -84,7 +84,7 @@
         <dependency>
             <groupId>org.xerial</groupId>
             <artifactId>sqlite-jdbc</artifactId>
-            <version>3.39.2.0</version>
+            <version>3.39.3.0</version>
         </dependency>
     </dependencies>
 </project>
