@@ -2,7 +2,7 @@
 
 ## About The Project
 
-<img align="right" src="https://user-images.githubusercontent.com/88390464/200192182-7f87b55a-0197-4b84-8f68-564b83a06920.png" height="200" width="200" radius="50%">
+<img align="right" src="https://user-images.githubusercontent.com/88390464/200192182-7f87b55a-0197-4b84-8f68-564b83a06920.png" height="200" width="200" border-radius="50%">
 
 
 This is just a small collection of classes that will help you deal with <br> 
