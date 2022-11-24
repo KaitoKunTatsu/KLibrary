@@ -92,7 +92,7 @@ public class LanguageParser {
 
     public static void main(String[] args) throws IOException {
         LanguageParser sut = new LanguageParser("src/main/java/KLibrary/utils/grammar.json");
-        List<String> strs = sut.scan("12332331");
+        List<String> strs = sut.scan("1222");
         if (strs == null) System.out.println("invalid");
         else
             for (String str : strs) System.out.println(str);

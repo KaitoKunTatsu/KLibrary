@@ -14,4 +14,43 @@ public class SortUtils {
 
     public static float[] quickSort(float[] pArray) {return pArray;}
 
+    /**
+     * 	Quicksort algorithm: worst-case O(n^2), average- and best-Case O(n*log(n))
+     * 	NOT FINISHED YET
+     *
+     * 	@param arr	Array
+     * */
+    public static int[] quickSort(int[] arr, final int iStart, final int iEnd) {
+        int index = partition(arr, iStart, iEnd);
+
+        if (iStart < index-1) quickSort(arr, iStart, index-1);
+        if (index < iEnd) quickSort(arr, index, iEnd);
+
+        return arr;
+    }
+
+    private static int partition(int[] arr, int iStart, int iEnd) {
+        int pivot = (iStart+iEnd)/2;
+        int low = iStart;
+        int high = iEnd;
+
+        while (low <= high) {
+            while (arr[high] > arr[pivot]) high--;
+            while (arr[low] < arr[pivot]) low++;
+            if (low <= high) swap(arr, low, high); low++; high--;
+        }
+        return low;
+    }
+
+    public static void swap(int[] arr, int i1, int i2) {
+        int temp = arr[i1];
+        arr[i1] = arr[i2];
+        arr[i2] = temp;
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {10,1,2,44,2,4,24,1,5,2};
+        SortUtils.quickSort(arr);
+        for (int i:arr) System.out.println(i);
+    }
 }
