@@ -39,22 +39,39 @@ public class LanguageParser {
     }
 
     /**
-     * Scanns a
+     *     List<String> lTerminalList = new ArrayList<>();
+     *         int lStart = 0;
+     *         int lEnd = 1;
+     *         while (lEnd <= pInput.length()) {
+     *             String lCurrentSubstring = pInput.substring(lStart,lEnd);
+     *             if (isTerminal(lCurrentSubstring) != -1) {
+     *                 lTerminalList.add(lCurrentSubstring);
+     *                 lStart = lEnd;
+     *             }
+     *             ++lEnd;
+     *         }
+     *         if (lEnd-lStart > 1) return null;
+     *
+     *         return lTerminalList;
+     *
      * */
     public List<String> scan(String pInput) {
-        List<String> lTerminalList = new ArrayList<>();
+        final List<String> lTerminalList = new ArrayList<>();
+        final int lMaxLength = terminals[terminals.length-1].length();
         int lStart = 0;
-        int lEnd = 1;
-        while (lEnd <= pInput.length()) {
-            String lCurrentSubstring = pInput.substring(lStart,lEnd);
-            if (isTerminal(lCurrentSubstring) != -1) {
-                lTerminalList.add(lCurrentSubstring);
-                lStart = lEnd;
+        int lEnd = lMaxLength;
+        while (lEnd != lStart) {
+            if (lEnd <= pInput.length()) {
+                final int lIndexInTerminals = getIndexInTerminals(pInput.substring(lStart,lEnd));
+                if (lIndexInTerminals != -1) {
+                    lTerminalList.add(terminals[lIndexInTerminals]);
+                    lStart = lEnd;
+                    lEnd += lMaxLength;
+                    continue;
+                }
             }
-            ++lEnd;
+            lEnd--;
         }
-        if (lEnd-lStart > 1) return null;
-
         return lTerminalList;
     }
 
@@ -74,7 +91,7 @@ public class LanguageParser {
         return true;
     }
 
-    public int isTerminal(String pTerminal) {
+    public int getIndexInTerminals(String pTerminal) {
         for (int i = terminals.length-1; i >= 0; --i) {
             if (terminals[i].equals(pTerminal)) return i;
         }
@@ -92,7 +109,7 @@ public class LanguageParser {
 
     public static void main(String[] args) throws IOException {
         LanguageParser sut = new LanguageParser("src/main/java/KLibrary/utils/grammar.json");
-        List<String> strs = sut.scan("1222");
+        List<String> strs = sut.scan("31333");
         if (strs == null) System.out.println("invalid");
         else
             for (String str : strs) System.out.println(str);
