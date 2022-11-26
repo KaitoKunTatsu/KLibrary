@@ -28,7 +28,7 @@ import java.util.List;
 public class LanguageParser {
 
     String[] terminals, nonTerminalsVariables;
-    PRToken[][] productionRules;
+    List<List<PRToken>>[] productionRules;
 
     /**
      *
@@ -119,8 +119,8 @@ public class LanguageParser {
 
     }
 
-    private List<PRToken>[] getRules(JSONArray pRules) {
-        List<PRToken>[] lRulesList = new ArrayList<>[pRules.length()];
+    private List<List<PRToken>>[] getRules(JSONArray pRules) {
+        List<List<PRToken>>[] lRulesList = new ArrayList<>[pRules.length()];
         for (int i = 0; i < pRules.length(); i++) {
 
        }
