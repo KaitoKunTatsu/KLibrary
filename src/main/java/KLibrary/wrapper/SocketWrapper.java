@@ -23,7 +23,7 @@ import java.security.spec.InvalidKeySpecException;
  * This class wraps a {@link Socket} and provides read, write, etc. methods
  *
  * @version 1.2.0 | last edit: 07.10.2022
- * @author Joshua H. | KaitoKunTatsu#3656
+ * @author Joshua Hartjes | KaitoKunTatsu#3656
  * */
 public class SocketWrapper {
 

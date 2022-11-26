@@ -1,5 +1,11 @@
 package KLibrary.utils;
 
+/**
+ *
+ * (<a href="https://github.com/KaitoKunTatsu/KLibrary">KLibrary</a>)
+ * @version	1.3.0 | last edit: 25.11.2022
+ * @author Joshua Hartjes | KaitoKunTatsu#3656
+ */
 public class SearchUtils {
 
 

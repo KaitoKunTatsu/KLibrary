@@ -15,7 +15,7 @@ import java.util.Base64;
  * (<a href="https://github.com/KaitoKunTatsu/KLibrary">KLibrary</a>)
  *
  * @version	1.2.0 | last edit: 08.09.2022
- * @author Joshua H. | KaitoKunTatsu#3656
+ * @author Joshua Hartjes | KaitoKunTatsu#3656
  */
 public class EncryptionUtils {
 

@@ -11,48 +11,59 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A class providing methods for regular grammar (word validation).
+ * Define a language via JSON format: <br>
+ * {
+ *      *     "terminals": [],
+ *      *     "non-terminal_variables": [],
+ *      *     "production_rules": []
+ *      *
+ * } <br>
+ *
+ * (<a href="https://github.com/KaitoKunTatsu/KLibrary">KLibrary</a>)
+ * @version	1.3.0 | last edit: 25.11.2022
+ * @author Joshua Hartjes | KaitoKunTatsu#3656
+ */
 public class LanguageParser {
 
-    String[] terminals, nonTerminalsVariables, productionRules;
+    String[] terminals, nonTerminalsVariables;
+    PRToken[][] productionRules;
 
     /**
-     * {
-     *     "terminals": [],
-     *     "non-terminal_variables": [],
-     *     "production_rules": []
-     * }
+     *
+     *
+     * @param pGrammarJSONStream    {@link InputStream} of JSON file
+     * @see JSONObject
+     * @see JSONTokener
      * */
-    public LanguageParser(InputStream pGrammarJSONStream) throws JSONException {
+    public LanguageParser(InputStream pGrammarJSONStream) throws JSONException, IllegalArgumentException {
         JSONObject lJSON= new JSONObject(new JSONTokener(pGrammarJSONStream));
 
         terminals = initArray(lJSON.getJSONArray("terminals"));
         nonTerminalsVariables = initArray(lJSON.getJSONArray("non-terminal_variables"));
-        productionRules = initArray(lJSON.getJSONArray("production_rules"));
-    }
-
-    private String[] initArray(JSONArray pJSONArray) {
-        return SortUtils.quickSort(pJSONArray.toList().toArray(new String[0]));
-    }
-
-    public LanguageParser(String pGrammarJSONPath) throws IOException{
-        this(new FileInputStream(pGrammarJSONPath));
+        productionRules = getRules(lJSON.getJSONArray("production_rules"));
+        if (productionRules == null || terminals == null || nonTerminalsVariables == null) throw new IllegalArgumentException();
     }
 
     /**
-     *     List<String> lTerminalList = new ArrayList<>();
-     *         int lStart = 0;
-     *         int lEnd = 1;
-     *         while (lEnd <= pInput.length()) {
-     *             String lCurrentSubstring = pInput.substring(lStart,lEnd);
-     *             if (isTerminal(lCurrentSubstring) != -1) {
-     *                 lTerminalList.add(lCurrentSubstring);
-     *                 lStart = lEnd;
-     *             }
-     *             ++lEnd;
-     *         }
-     *         if (lEnd-lStart > 1) return null;
      *
-     *         return lTerminalList;
+     *
+     * @param pGrammarInJSONFormat  String representation of a JSON containing terminals, non-terminal variables and production rules
+     * @see JSONObject
+     * */
+    public LanguageParser(String pGrammarInJSONFormat) throws IllegalArgumentException {
+        JSONObject lJSON= new JSONObject(pGrammarInJSONFormat);
+
+        terminals = initArray(lJSON.getJSONArray("terminals"));
+        nonTerminalsVariables = initArray(lJSON.getJSONArray("non-terminal_variables"));
+        productionRules = getRules(lJSON.getJSONArray("production_rules"));
+        if (productionRules == null || terminals == null || nonTerminalsVariables == null) throw new IllegalArgumentException();
+    }
+
+
+    /**
+     *
      *
      * */
     public List<String> scan(String pInput) {
@@ -70,7 +81,7 @@ public class LanguageParser {
                     continue;
                 }
             }
-            lEnd--;
+            --lEnd;
         }
         return lTerminalList;
     }
@@ -82,11 +93,6 @@ public class LanguageParser {
     public boolean parse(List<String> pScannedInput) {
         if (pScannedInput == null) return false;
 
-        int lStart = 0;
-        int lEnd = 1;
-        while (lEnd < pScannedInput.size()) {
-
-        }
 
         return true;
     }
@@ -105,11 +111,32 @@ public class LanguageParser {
         return -1;
     }
 
+    private String[] initArray(JSONArray pJSONArray) {
+        return SortUtils.quickSort(pJSONArray.toList().toArray(new String[0]));
+    }
 
+    private void interpretRule(List<PRToken> pTokenList, String pRule) {
+
+    }
+
+    private List<PRToken>[] getRules(JSONArray pRules) {
+        List<PRToken>[] lRulesList = new ArrayList<>[pRules.length()];
+        for (int i = 0; i < pRules.length(); i++) {
+
+       }
+        return lRulesList;
+    }
+
+    private record PRToken(Type type, int indexInArray) {
+        private enum Type {
+            VARIABLE,
+            TERMINAL
+        }
+    }
 
     public static void main(String[] args) throws IOException {
         LanguageParser sut = new LanguageParser("src/main/java/KLibrary/utils/grammar.json");
-        List<String> strs = sut.scan("31333");
+        List<String> strs = sut.scan("224422");
         if (strs == null) System.out.println("invalid");
         else
             for (String str : strs) System.out.println(str);

@@ -7,7 +7,7 @@ import java.io.File;
  * A part of the (<a href="https://github.com/KaitoKunTatsu/KLibrary">KLibrary</a>)
  *
  * @version 1.2.0 | last edit: 28.10.2022
- * @author Joshua H. | KaitoKunTatsu#3656
+ * @author Joshua Hartjes | KaitoKunTatsu#3656
  */
 public class SystemUtils {
 
