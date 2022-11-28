@@ -71,6 +71,7 @@ public class LanguageParser {
         final int lMaxLength = terminals[terminals.length-1].length();
         int lStart = 0;
         int lEnd = lMaxLength;
+
         while (lEnd != lStart) {
             if (lEnd <= pInput.length()) {
                 final int lIndexInTerminals = getIndexInTerminals(pInput.substring(lStart,lEnd));
@@ -120,7 +121,7 @@ public class LanguageParser {
     }
 
     private List<List<PRToken>>[] getRules(JSONArray pRules) {
-        List<List<PRToken>>[] lRulesList = new ArrayList<>[pRules.length()];
+        List<List<PRToken>>[] lRulesList = new ArrayList[pRules.length()];
         for (int i = 0; i < pRules.length(); i++) {
 
        }
@@ -135,7 +136,7 @@ public class LanguageParser {
     }
 
     public static void main(String[] args) throws IOException {
-        LanguageParser sut = new LanguageParser("src/main/java/KLibrary/utils/grammar.json");
+        LanguageParser sut = new LanguageParser(new FileInputStream("src/main/java/KLibrary/utils/grammar.json"));
         List<String> strs = sut.scan("224422");
         if (strs == null) System.out.println("invalid");
         else

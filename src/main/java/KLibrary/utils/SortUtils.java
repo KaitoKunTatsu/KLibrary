@@ -23,28 +23,36 @@ public class SortUtils {
      * 	Quicksort algorithm: worst-case O(n^2), average- and best-Case O(n*log(n))
      * 	NOT FINISHED YET
      *
-     * 	@param arr	Array
+     * 	@param pArr	Array
      * */
-    public static int[] quickSort(int[] arr, final int iStart, final int iEnd) {
-        int index = partition(arr, iStart, iEnd);
+    public static int[] quickSort(int[] pArr, int pStart, int pEnd) {
+        int lIndex = partition(pArr, pStart, pEnd);
 
-        if (iStart < index-1) quickSort(arr, iStart, index-1);
-        if (index < iEnd) quickSort(arr, index, iEnd);
+        if (pStart < lIndex-1) quickSort(pArr, pStart, lIndex-1);
+        if (lIndex < pEnd) quickSort(pArr, lIndex+1, pEnd);
 
-        return arr;
+        return pArr;
     }
 
-    private static int partition(int[] arr, int iStart, int iEnd) {
-        int pivot = (iStart+iEnd)/2;
-        int low = iStart;
-        int high = iEnd;
-
-        while (low <= high) {
-            while (arr[high] > arr[pivot]) high--;
-            while (arr[low] < arr[pivot]) low++;
-            if (low <= high) swap(arr, low, high); low++; high--;
+    private static int partition(int[] pArr, int pStart, int pEnd) {
+        int lPivot = pArr[pEnd/2];
+        int i = pStart;
+        for (int j = pStart; j<pEnd; j++)
+        {
+            if (pArr[j] < lPivot)
+            {
+                int lTemp = pArr[i];
+                pArr[i] = pArr[j];
+                pArr[j] = lTemp;
+                i++;
+            }
         }
-        return low;
+
+        int temp = pArr[i];
+        pArr[i] = pArr[pEnd];
+        pArr[pEnd] = temp;
+
+        return i;
     }
 
     public static void swap(int[] arr, int i1, int i2) {
@@ -55,7 +63,7 @@ public class SortUtils {
 
     public static void main(String[] args) {
         int[] arr = {10,1,2,44,2,4,24,1,5,2};
-        SortUtils.quickSort(arr);
+        arr=SortUtils.quickSort(arr);
         for (int i:arr) System.out.println(i);
     }
 }
