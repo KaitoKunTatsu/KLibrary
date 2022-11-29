@@ -86,7 +86,8 @@ public class LanguageParser {
 
     public boolean parse(List<String> pScannedInput) {
         if (pScannedInput == null) return false;
-        return validate(0, 0, pScannedInput) != -1;
+        int lLastIndex = validate(0, 0, pScannedInput);
+        return lLastIndex != -1 && lLastIndex == pScannedInput.size();
     }
 
     public boolean parse(String pInput) {
@@ -96,14 +97,18 @@ public class LanguageParser {
     private int validate(int pIndexInRules, int pIndexInInput, List<String> pInput) {
         boolean lFound = false;
         for (List<PRToken> option : productionRules[pIndexInRules]) {
-            if (lFound) break;
-            for (int i = 0; i < option.size(); ++i) {
-                if (option.get(i).type == PRToken.Type.VARIABLE && validate(option.get(i).indexInArray, pIndexInInput, pInput) == -1) {
+            if (lFound) return pIndexInInput;
+            for (PRToken prToken : option) {
+                if (prToken.type == PRToken.Type.VARIABLE) {
+                    if (validate(prToken.indexInArray, pIndexInInput, pInput) == -1) {
+                        lFound = false;
+                        break;
+                    }
+                }
+                else if (!terminals[prToken.indexInArray].equals(pInput.get(pIndexInInput))) {
                     lFound = false;
                     break;
                 }
-                else if (!terminals[option.get(i).indexInArray].equals(pInput.get(pIndexInInput)))
-                    return -1;
                 else
                     lFound = true;
                 ++pIndexInInput;
