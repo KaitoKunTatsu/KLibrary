@@ -38,12 +38,7 @@ public class LanguageParser {
      * @see JSONTokener
      * */
     public LanguageParser(InputStream pGrammarJSONStream) throws JSONException, IllegalArgumentException {
-        JSONObject lJSON= new JSONObject(new JSONTokener(pGrammarJSONStream));
-
-        terminals = initArray(lJSON.getJSONArray("terminals"));
-        nonTerminalsVariables = initArray(lJSON.getJSONArray("non-terminal_variables"));
-        productionRules = getRules(lJSON.getJSONArray("production_rules"));
-        if (productionRules == null || terminals == null || nonTerminalsVariables == null) throw new IllegalArgumentException();
+        this(new JSONObject(new JSONTokener(pGrammarJSONStream)));
     }
 
     /**
@@ -53,14 +48,16 @@ public class LanguageParser {
      * @see JSONObject
      * */
     public LanguageParser(String pGrammarInJSONFormat) throws IllegalArgumentException {
-        JSONObject lJSON= new JSONObject(pGrammarInJSONFormat);
-
-        terminals = initArray(lJSON.getJSONArray("terminals"));
-        nonTerminalsVariables = initArray(lJSON.getJSONArray("non-terminal_variables"));
-        productionRules = getRules(lJSON.getJSONArray("production_rules"));
-        if (productionRules == null || terminals == null || nonTerminalsVariables == null) throw new IllegalArgumentException();
+        this(new JSONObject(pGrammarInJSONFormat));
     }
 
+    public LanguageParser(JSONObject pGrammarJSON) {
+        terminals = initArray(pGrammarJSON.getJSONArray("terminals"));
+        nonTerminalsVariables = initArray(pGrammarJSON.getJSONArray("non-terminal_variables"));
+        productionRules = getRules(pGrammarJSON.getJSONArray("production_rules"));
+
+        if (terminals == null || nonTerminalsVariables == null ||productionRules.length == 0) throw new IllegalArgumentException();
+    }
 
     /**
      *
@@ -95,6 +92,7 @@ public class LanguageParser {
         if (pScannedInput == null) return false;
 
 
+
         return true;
     }
 
@@ -105,7 +103,7 @@ public class LanguageParser {
         return -1;
     }
 
-    public int isVariable(String pVar) {
+    public int getIndexInNonTerminalVars(String pVar) {
         for (int i = nonTerminalsVariables.length-1; i >= 0; --i) {
             if (nonTerminalsVariables[i].equals(pVar)) return i;
         }
@@ -120,11 +118,45 @@ public class LanguageParser {
 
     }
 
+
+    // Liste<Token> in einer Liste von optionen in einem array von Rules
     private List<List<PRToken>>[] getRules(JSONArray pRules) {
         List<List<PRToken>>[] lRulesList = new ArrayList[pRules.length()];
         for (int i = 0; i < pRules.length(); i++) {
+            String[] lRuleOptions = pRules.getString(i).split("\\|");
+            lRulesList[i] = new ArrayList<>();
 
-       }
+            for (String lRuleOption : lRuleOptions) {
+                List<PRToken> lTokenList = new ArrayList<>();
+                lRulesList[i].add(lTokenList);
+
+                int lMaxLength = terminals[terminals.length - 1].length();
+                if (lMaxLength < nonTerminalsVariables[nonTerminalsVariables.length - 1].length())
+                    lMaxLength = nonTerminalsVariables[nonTerminalsVariables.length - 1].length();
+                int lStart = 0;
+                int lEnd = lMaxLength;
+                while (lEnd != lStart) {
+                    if (lEnd <= lRuleOption.length()) {
+                        final int lIndexInTerminals = getIndexInTerminals(lRuleOption.substring(lStart, lEnd));
+                        if (lIndexInTerminals != -1) {
+                            lTokenList.add(new PRToken(PRToken.Type.TERMINAL, lIndexInTerminals));
+                            lStart = lEnd;
+                            lEnd += lMaxLength;
+                            continue;
+                        }
+                        final int lIndexInNonTerminalVars = getIndexInNonTerminalVars(lRuleOption.substring(lStart, lEnd));
+                        if (lIndexInNonTerminalVars != -1) {
+                            lTokenList.add(new PRToken(PRToken.Type.VARIABLE, lIndexInNonTerminalVars));
+                            lStart = lEnd;
+                            lEnd += lMaxLength;
+                            continue;
+                        }
+                    }
+                    --lEnd;
+                }
+            }
+
+        }
         return lRulesList;
     }
 
