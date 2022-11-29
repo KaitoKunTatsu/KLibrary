@@ -1,5 +1,5 @@
 {
   "terminals": ["2","22","44","2244"],
   "non-terminal_variables": ["A","B","C"],
-  "production_rules": ["22B|2244C|BC", "2", "44"]
+  "production_rules": ["2244|2244B", "2244", "44"]
 }

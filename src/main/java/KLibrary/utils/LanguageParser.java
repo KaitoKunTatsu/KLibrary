@@ -84,22 +84,32 @@ public class LanguageParser {
         return lTerminalList;
     }
 
+    public boolean parse(List<String> pScannedInput) {
+        if (pScannedInput == null) return false;
+        return validate(0, 0, pScannedInput) != -1;
+    }
+
     public boolean parse(String pInput) {
         return parse(scan(pInput));
     }
 
-    public boolean parse(List<String> pScannedInput) {
-        if (pScannedInput == null) return false;
-
-        for (List<PRToken> option : productionRules[0]) {
-            for (int i = 0; i < option.size(); ++i){
-                if (option.get(i).type == PRToken.Type.VARIABLE) {
-
+    private int validate(int pIndexInRules, int pIndexInInput, List<String> pInput) {
+        boolean lFound = false;
+        for (List<PRToken> option : productionRules[pIndexInRules]) {
+            if (lFound) break;
+            for (int i = 0; i < option.size(); ++i) {
+                if (option.get(i).type == PRToken.Type.VARIABLE && validate(option.get(i).indexInArray, pIndexInInput, pInput) == -1) {
+                    lFound = false;
+                    break;
                 }
+                else if (!terminals[option.get(i).indexInArray].equals(pInput.get(pIndexInInput)))
+                    return -1;
+                else
+                    lFound = true;
+                ++pIndexInInput;
             }
         }
-
-        return true;
+        return lFound ? pIndexInInput : -1;
     }
 
     public int getIndex(String pElement, String[] pArr) {
@@ -111,10 +121,6 @@ public class LanguageParser {
 
     private String[] initArray(JSONArray pJSONArray) {
         return SortUtils.quickSort(pJSONArray.toList().toArray(new String[0]));
-    }
-
-    private void interpretRule(List<PRToken> pTokenList, String pRule) {
-
     }
 
     // Liste<Token> in einer Liste von optionen in einem array von Rules
@@ -167,9 +173,11 @@ public class LanguageParser {
 
     public static void main(String[] args) throws IOException {
         LanguageParser sut = new LanguageParser(new FileInputStream("src/main/java/KLibrary/utils/grammar.json"));
-        List<String> strs = sut.scan("224422");
+        List<String> strs = sut.scan("22442244");
         if (strs == null) System.out.println("invalid");
         else
             for (String str : strs) System.out.println(str);
+
+        System.out.println("\n"+sut.parse(strs));
     }
 }
