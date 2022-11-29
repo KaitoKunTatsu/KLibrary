@@ -86,26 +86,30 @@ public class LanguageParser {
 
     public boolean parse(List<String> pScannedInput) {
         if (pScannedInput == null) return false;
-        int lLastIndex = validate(0, 0, pScannedInput);
-        return lLastIndex != -1 && lLastIndex == pScannedInput.size();
+
+        for (int i = 0; i < productionRules[0].size(); ++i) {
+            int lLastIndex = validate(0, i, 0,pScannedInput);
+            if (lLastIndex != -1 && lLastIndex == pScannedInput.size()) return true;
+        }
+        return false;
     }
 
     public boolean parse(String pInput) {
         return parse(scan(pInput));
     }
 
-    private int validate(int pIndexInRules, int pIndexInInput, List<String> pInput) {
+    private int validate(int pIndexInRules, int lOptionsToSkip, int pIndexInInput, List<String> pInput) {
         boolean lFound = false;
-        for (List<PRToken> option : productionRules[pIndexInRules]) {
+        for (int i = lOptionsToSkip; i < productionRules[pIndexInRules].size(); ++i) {
             if (lFound) return pIndexInInput;
-            for (PRToken prToken : option) {
+            for (PRToken prToken : productionRules[pIndexInRules].get(i)) {
                 if (prToken.type == PRToken.Type.VARIABLE) {
-                    if (validate(prToken.indexInArray, pIndexInInput, pInput) == -1) {
+                    if (validate(prToken.indexInArray, 0, pIndexInInput, pInput) == -1) {
                         lFound = false;
                         break;
                     }
                 }
-                else if (!terminals[prToken.indexInArray].equals(pInput.get(pIndexInInput))) {
+                else if (pInput.size() <= pIndexInInput || !terminals[prToken.indexInArray].equals(pInput.get(pIndexInInput))) {
                     lFound = false;
                     break;
                 }
@@ -178,7 +182,7 @@ public class LanguageParser {
 
     public static void main(String[] args) throws IOException {
         LanguageParser sut = new LanguageParser(new FileInputStream("src/main/java/KLibrary/utils/grammar.json"));
-        List<String> strs = sut.scan("22442244");
+        List<String> strs = sut.scan("2244224444");
         if (strs == null) System.out.println("invalid");
         else
             for (String str : strs) System.out.println(str);
