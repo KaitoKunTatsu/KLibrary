@@ -71,7 +71,7 @@ public class LanguageParser {
 
         while (lEnd != lStart) {
             if (lEnd <= pInput.length()) {
-                final int lIndexInTerminals = getIndexInTerminals(pInput.substring(lStart,lEnd));
+                final int lIndexInTerminals = getIndex(pInput.substring(lStart,lEnd), terminals);
                 if (lIndexInTerminals != -1) {
                     lTerminalList.add(terminals[lIndexInTerminals]);
                     lStart = lEnd;
@@ -91,21 +91,20 @@ public class LanguageParser {
     public boolean parse(List<String> pScannedInput) {
         if (pScannedInput == null) return false;
 
+        for (List<PRToken> option : productionRules[0]) {
+            for (int i = 0; i < option.size(); ++i){
+                if (option.get(i).type == PRToken.Type.VARIABLE) {
 
+                }
+            }
+        }
 
         return true;
     }
 
-    public int getIndexInTerminals(String pTerminal) {
-        for (int i = terminals.length-1; i >= 0; --i) {
-            if (terminals[i].equals(pTerminal)) return i;
-        }
-        return -1;
-    }
-
-    public int getIndexInNonTerminalVars(String pVar) {
-        for (int i = nonTerminalsVariables.length-1; i >= 0; --i) {
-            if (nonTerminalsVariables[i].equals(pVar)) return i;
+    public int getIndex(String pElement, String[] pArr) {
+        for (int i = pArr.length-1; i >= 0; --i) {
+            if (pArr[i].equals(pElement)) return i;
         }
         return -1;
     }
@@ -117,7 +116,6 @@ public class LanguageParser {
     private void interpretRule(List<PRToken> pTokenList, String pRule) {
 
     }
-
 
     // Liste<Token> in einer Liste von optionen in einem array von Rules
     private List<List<PRToken>>[] getRules(JSONArray pRules) {
@@ -137,14 +135,14 @@ public class LanguageParser {
                 int lEnd = lMaxLength;
                 while (lEnd != lStart) {
                     if (lEnd <= lRuleOption.length()) {
-                        final int lIndexInTerminals = getIndexInTerminals(lRuleOption.substring(lStart, lEnd));
+                        final int lIndexInTerminals = getIndex(lRuleOption.substring(lStart, lEnd), terminals);
                         if (lIndexInTerminals != -1) {
                             lTokenList.add(new PRToken(PRToken.Type.TERMINAL, lIndexInTerminals));
                             lStart = lEnd;
                             lEnd += lMaxLength;
                             continue;
                         }
-                        final int lIndexInNonTerminalVars = getIndexInNonTerminalVars(lRuleOption.substring(lStart, lEnd));
+                        final int lIndexInNonTerminalVars = getIndex(lRuleOption.substring(lStart, lEnd), nonTerminalsVariables);
                         if (lIndexInNonTerminalVars != -1) {
                             lTokenList.add(new PRToken(PRToken.Type.VARIABLE, lIndexInNonTerminalVars));
                             lStart = lEnd;
