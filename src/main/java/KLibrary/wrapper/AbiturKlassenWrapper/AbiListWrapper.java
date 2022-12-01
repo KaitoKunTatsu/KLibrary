@@ -1,4 +1,4 @@
-package KLibrary.wrapper.AbiturKlassenUtils;
+package KLibrary.wrapper.AbiturKlassenWrapper;
 
 import KLibrary.datastructures.foreign.List;
 

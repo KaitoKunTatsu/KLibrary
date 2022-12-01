@@ -1,54 +1,66 @@
 package KLibrary.utils;
 
+
 /**
  * (<a href="https://github.com/KaitoKunTatsu/KLibrary">KLibrary</a>)
- * @version	1.3.0 | last edit: 25.11.2022
+ * @version	1.3.0 | last edit: 01.12.2022
  * @author Joshua Hartjes | KaitoKunTatsu#3656
  */
 public class SortUtils {
 
-    public static String[] quickSort(String[] pArray) {return pArray;}
 
-    public static Object[] quickSort(Object[] pArray) {return pArray;}
-
-    public static long[] quickSort(long[] pArray) {return pArray;}
-
-    public static double[] quickSort(double[] pArray) {return pArray;}
-
-    public static float[] quickSort(float[] pArray) {return pArray;}
-
-    public static int[] quickSort(int[] pArray) {
-        return quickSort(pArray, 0, pArray.length-1);
+    public static void quickSort(String[] pArr) {
+        quickSort(pArr, 0, pArr.length-1);
     }
 
-    /**
-     * 	Quicksort algorithm: worst-case O(n^2), average- and best-Case O(n*log(n))
-     * 	NOT FINISHED YET
-     *
-     * 	@param pArr	Array
-     * */
-    public static int[] quickSort(int[] pArr, int pStart, int pEnd) {
-        if (pStart > pEnd) return null;
+    public static void quickSort(String[] pArr, int pLeft, int pRight) {
+        String lPivot = pArr[(pLeft + pRight) / 2];
+        int lLow = pLeft,
+            lHigh = pRight;
 
-        int lPIndex = partition(pArr, pStart, pEnd);
-        quickSort(pArr, pStart, lPIndex - 1);
-        quickSort(pArr, lPIndex+1, pEnd);
+        while (lLow <= lHigh) {
+            while (pArr[lLow].compareTo(lPivot) < 0)
+                ++lLow;
+            while (pArr[lHigh].compareTo(lPivot) > 0)
+                --lHigh;
 
-        return pArr;
-    }
-
-    private static int partition(int[] pArr, int pStart, int pEnd) {
-        int lPivot = pArr[pEnd];
-        int i = pStart;
-
-        for (int j = pStart; j < pEnd; ++j) {
-            if (pArr[j] < lPivot) {
-                swap(pArr, i, j);
-                ++i;
+            if (lLow <= lHigh) {
+                swap(pArr,lLow,lHigh);
+                ++lLow;
+                --lHigh;
             }
         }
-        swap(pArr, i, pEnd);
-        return i;
+        if (pLeft < lHigh)
+            quickSort(pArr, pLeft, lHigh);
+        if (lLow < pRight)
+            quickSort(pArr, lLow, pRight);
+    }
+
+    public static void quickSort(int[] pArr) {
+        quickSort(pArr, 0, pArr.length-1);
+    }
+
+    public static void quickSort(int[] pArr, int pLeft, int pRight) {
+        int lLow = pLeft,
+            lHigh = pRight,
+            lPivot = pArr[(pLeft + pRight) / 2];
+
+        while (lLow <= lHigh) {
+            while (pArr[lLow] < lPivot)
+                ++lLow;
+            while (pArr[lHigh] > lPivot)
+                ++lHigh;
+
+            if (lLow <= lHigh) {
+                swap(pArr,lLow,lHigh);
+                ++lLow;
+                --lHigh;
+            }
+        }
+        if (pLeft < lHigh)
+            quickSort(pArr, pLeft, lHigh);
+        if (lLow < pRight)
+            quickSort(pArr, lLow, pRight);
     }
 
     public static void swap(int[] arr, int i1, int i2) {
@@ -57,9 +69,39 @@ public class SortUtils {
         arr[i2] = temp;
     }
 
+    public static void swap(long[] arr, int i1, int i2) {
+        long temp = arr[i1];
+        arr[i1] = arr[i2];
+        arr[i2] = temp;
+    }
+
+    public static void swap(double[] arr, int i1, int i2) {
+        double temp = arr[i1];
+        arr[i1] = arr[i2];
+        arr[i2] = temp;
+    }
+
+    public static void swap(float[] arr, int i1, int i2) {
+        float temp = arr[i1];
+        arr[i1] = arr[i2];
+        arr[i2] = temp;
+    }
+
+    public static void swap(char[] arr, int i1, int i2) {
+        char temp = arr[i1];
+        arr[i1] = arr[i2];
+        arr[i2] = temp;
+    }
+
+    public static void swap(Object[] arr, int i1, int i2) {
+        Object temp = arr[i1];
+        arr[i1] = arr[i2];
+        arr[i2] = temp;
+    }
+
     public static void main(String[] args) {
-        int[] arr = {10,1,2,44,2,4,24,1,5,2};
+        String[] arr = {"a","b","CA","CB","abc","C","C"};
         SortUtils.quickSort(arr);
-        for (int i:arr) System.out.println(i);
+        for (String i:arr) System.out.println(i);
     }
 }

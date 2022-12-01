@@ -104,10 +104,12 @@ public class LanguageParser {
             if (lFound) return pIndexInInput;
             for (PRToken prToken : productionRules[pIndexInRules].get(i)) {
                 if (prToken.type == PRToken.Type.VARIABLE) {
-                    if (validate(prToken.indexInArray, 0, pIndexInInput, pInput) == -1) {
+                    int lNewIndex = validate(prToken.indexInArray, 0, pIndexInInput, pInput);
+                    if (lNewIndex == -1) {
                         lFound = false;
                         break;
                     }
+                    pIndexInInput = lNewIndex;
                 }
                 else if (pInput.size() <= pIndexInInput || !terminals[prToken.indexInArray].equals(pInput.get(pIndexInInput))) {
                     lFound = false;
@@ -129,7 +131,9 @@ public class LanguageParser {
     }
 
     private String[] initArray(JSONArray pJSONArray) {
-        return SortUtils.quickSort(pJSONArray.toList().toArray(new String[0]));
+        String[] lArr = pJSONArray.toList().toArray(new String[0]);
+        SortUtils.quickSort(lArr);
+        return lArr;
     }
 
     // Liste<Token> in einer Liste von optionen in einem array von Rules

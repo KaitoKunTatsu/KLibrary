@@ -7,7 +7,7 @@ This is just a small collection of classes that will help you deal with <br>
 - [databases](src/main/java/KLibrary/utils/SQLUtils.java)
 - [sockets](src/main/java/KLibrary/wrapper/SocketWrapper.java) and [server sockets](src/main/java/KLibrary/wrapper/ServerSocketWrapper.java)
 - classes of the North Rhine-Westphalia government
-  - [List](src/main/java/KLibrary/wrapper/AbiturKlassenUtils/AbiListWrapper.java)
+  - [List](src/main/java/KLibrary/wrapper/AbiturKlassenWrapper/AbiListWrapper.java)
   - [Graphs](src/main/java/KLibrary/utils/AbiturKlassenUtils/GraphHandler.java)
 - [encryption](src/main/java/KLibrary/utils/EncryptionUtils.java)
   - OTP
