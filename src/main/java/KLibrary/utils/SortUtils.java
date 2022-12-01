@@ -11,13 +11,15 @@ public class SortUtils {
 
     public static Object[] quickSort(Object[] pArray) {return pArray;}
 
-    public static int[] quickSort(int[] pArray) {return pArray;}
-
     public static long[] quickSort(long[] pArray) {return pArray;}
 
     public static double[] quickSort(double[] pArray) {return pArray;}
 
     public static float[] quickSort(float[] pArray) {return pArray;}
+
+    public static int[] quickSort(int[] pArray) {
+        return quickSort(pArray, 0, pArray.length-1);
+    }
 
     /**
      * 	Quicksort algorithm: worst-case O(n^2), average- and best-Case O(n*log(n))
@@ -26,32 +28,26 @@ public class SortUtils {
      * 	@param pArr	Array
      * */
     public static int[] quickSort(int[] pArr, int pStart, int pEnd) {
-        int lIndex = partition(pArr, pStart, pEnd);
+        if (pStart > pEnd) return null;
 
-        if (pStart < lIndex-1) quickSort(pArr, pStart, lIndex-1);
-        if (lIndex < pEnd) quickSort(pArr, lIndex+1, pEnd);
+        int lPIndex = partition(pArr, pStart, pEnd);
+        quickSort(pArr, pStart, lPIndex - 1);
+        quickSort(pArr, lPIndex+1, pEnd);
 
         return pArr;
     }
 
     private static int partition(int[] pArr, int pStart, int pEnd) {
-        int lPivot = pArr[pEnd/2];
+        int lPivot = pArr[pEnd];
         int i = pStart;
-        for (int j = pStart; j<pEnd; j++)
-        {
-            if (pArr[j] < lPivot)
-            {
-                int lTemp = pArr[i];
-                pArr[i] = pArr[j];
-                pArr[j] = lTemp;
-                i++;
+
+        for (int j = pStart; j < pEnd; ++j) {
+            if (pArr[j] < lPivot) {
+                swap(pArr, i, j);
+                ++i;
             }
         }
-
-        int temp = pArr[i];
-        pArr[i] = pArr[pEnd];
-        pArr[pEnd] = temp;
-
+        swap(pArr, i, pEnd);
         return i;
     }
 
@@ -63,7 +59,7 @@ public class SortUtils {
 
     public static void main(String[] args) {
         int[] arr = {10,1,2,44,2,4,24,1,5,2};
-        arr=SortUtils.quickSort(arr);
+        SortUtils.quickSort(arr);
         for (int i:arr) System.out.println(i);
     }
 }
