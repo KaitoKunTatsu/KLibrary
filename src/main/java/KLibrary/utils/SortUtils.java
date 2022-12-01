@@ -8,20 +8,19 @@ package KLibrary.utils;
  */
 public class SortUtils {
 
-
-    public static void quickSort(String[] pArr) {
-        quickSort(pArr, 0, pArr.length-1);
+    public static void quickSortLengthOnly(String[] pArr) {
+        quickSortLengthOnly(pArr, 0, pArr.length-1);
     }
 
-    public static void quickSort(String[] pArr, int pLeft, int pRight) {
+    public static void quickSortLengthOnly(String[] pArr, int pLeft, int pRight) {
         String lPivot = pArr[(pLeft + pRight) / 2];
         int lLow = pLeft,
-            lHigh = pRight;
+                lHigh = pRight;
 
         while (lLow <= lHigh) {
-            while (pArr[lLow].compareTo(lPivot) < 0)
+            while (pArr[lLow].length() < lPivot.length())
                 ++lLow;
-            while (pArr[lHigh].compareTo(lPivot) > 0)
+            while (pArr[lHigh].length() > lPivot.length())
                 --lHigh;
 
             if (lLow <= lHigh) {
@@ -30,10 +29,55 @@ public class SortUtils {
                 --lHigh;
             }
         }
+
         if (pLeft < lHigh)
-            quickSort(pArr, pLeft, lHigh);
+            quickSortLengthOnly(pArr, pLeft, lHigh);
         if (lLow < pRight)
-            quickSort(pArr, lLow, pRight);
+            quickSortLengthOnly(pArr, lLow, pRight);
+    }
+
+    public static void quickSort(String[] pArr, boolean pCaseSensitivity) {
+        quickSort(pArr, 0, pArr.length-1, pCaseSensitivity);
+    }
+
+    public static void quickSort(String[] pArr, int pLeft, int pRight, boolean pCaseSensitivity) {
+        String lPivot = pArr[(pLeft + pRight) / 2];
+        int lLow = pLeft,
+            lHigh = pRight;
+
+        if (pCaseSensitivity) {
+            while (lLow <= lHigh) {
+                while (pArr[lLow].compareTo(lPivot) < 0)
+                    ++lLow;
+                while (pArr[lHigh].compareTo(lPivot) > 0)
+                    --lHigh;
+
+                if (lLow <= lHigh) {
+                    swap(pArr,lLow,lHigh);
+                    ++lLow;
+                    --lHigh;
+                }
+            }
+        }
+        else {
+            while (lLow <= lHigh) {
+                while (pArr[lLow].compareToIgnoreCase(lPivot) < 0)
+                    ++lLow;
+                while (pArr[lHigh].compareToIgnoreCase(lPivot) > 0)
+                    --lHigh;
+
+                if (lLow <= lHigh) {
+                    swap(pArr,lLow,lHigh);
+                    ++lLow;
+                    --lHigh;
+                }
+            }
+        }
+
+        if (pLeft < lHigh)
+            quickSort(pArr, pLeft, lHigh, pCaseSensitivity);
+        if (lLow < pRight)
+            quickSort(pArr, lLow, pRight, pCaseSensitivity);
     }
 
     public static void quickSort(int[] pArr) {
@@ -101,7 +145,7 @@ public class SortUtils {
 
     public static void main(String[] args) {
         String[] arr = {"a","b","CA","CB","abc","C","C"};
-        SortUtils.quickSort(arr);
+        SortUtils.quickSort(arr, false);
         for (String i:arr) System.out.println(i);
     }
 }

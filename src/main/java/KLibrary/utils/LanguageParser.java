@@ -132,7 +132,7 @@ public class LanguageParser {
 
     private String[] initArray(JSONArray pJSONArray) {
         String[] lArr = pJSONArray.toList().toArray(new String[0]);
-        SortUtils.quickSort(lArr);
+        SortUtils.quickSort(lArr, false);
         return lArr;
     }
 
