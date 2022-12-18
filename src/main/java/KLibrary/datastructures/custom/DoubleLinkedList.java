@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * (<a href="https://github.com/KaitoKunTatsu/KLibrary">KLibrary</a>)
+ *
+ * <br>
+ * Part of the <a href="https://github.com/KaitoKunTatsu/KLibrary">KLibrary</a>
  *
  * @version 1.2.0 | last edit: 29.10.2022
- * @author Joshua H. | KaitoKunTatsu#3656
+ * @author Joshua Hartjes | KaitoKunTatsu#3656
  */
 public class DoubleLinkedList <T> {
 

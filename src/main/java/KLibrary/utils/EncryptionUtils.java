@@ -11,11 +11,12 @@ import java.security.spec.X509EncodedKeySpec;
 import java.util.Base64;
 
 /**
- * This class provides RSA, AES and OTP encryption and hashing <br>
- * (<a href="https://github.com/KaitoKunTatsu/KLibrary">KLibrary</a>)
+ * This class provides RSA, AES and OTP encryption and hashing.
+ * <br>
+ * Part of the <a href="https://github.com/KaitoKunTatsu/KLibrary">KLibrary</a>
  *
  * @version	1.2.0 | last edit: 08.09.2022
- * @author Joshua H. | KaitoKunTatsu#3656
+ * @author Joshua Hartjes | KaitoKunTatsu#3656
  */
 public class EncryptionUtils {
 

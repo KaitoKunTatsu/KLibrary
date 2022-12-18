@@ -12,10 +12,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Thread accepting new clients connecting to the KMes Server
+ * Thread accepting new clients connecting to the KMes Server.
+ * <br>
+ * Part of the <a href="https://github.com/KaitoKunTatsu/KLibrary">KLibrary</a>
  *
  * @version 1.3.0 | last edit: 18.12.2022
- * @author Joshua H. | KaitoKunTatsu#3656
+ * @author Joshua Hartjes | KaitoKunTatsu#3656
  * */
 public abstract class ServerSocketWrapper {
 

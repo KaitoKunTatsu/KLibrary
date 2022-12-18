@@ -1,9 +1,6 @@
 package KLibrary.wrapper;
 
-// Own Library https://github.com/KaitoKunTatsu/KLibrary
-
 import KLibrary.utils.EncryptionUtils;
-
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
@@ -21,9 +18,11 @@ import java.security.spec.InvalidKeySpecException;
 
 /**
  * This class wraps a {@link Socket} and provides read, write, etc. methods
+ * <br>
+ * Part of the <a href="https://github.com/KaitoKunTatsu/KLibrary">KLibrary</a>
  *
- * @version 1.2.0 | last edit: 07.10.2022
- * @author Joshua H. | KaitoKunTatsu#3656
+ * @version 1.3.0 | last edit: 18.12.2022
+ * @author Joshua Hartjes | KaitoKunTatsu#3656
  * */
 public class SocketWrapper {
 
@@ -62,9 +61,7 @@ public class SocketWrapper {
         this(new Socket(pIp, pPort), null);
     }
 
-    public void establishAES() throws IOException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException, InvalidKeySpecException
-    {
-        if (AESKey != null) return;
+    public void establishAES() throws IOException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException, InvalidKeySpecException {
         // RSA
         byte[] lEncodedRSAKey = encryptionUtils.getPublicKey().getEncoded();
         writer.writeInt(lEncodedRSAKey.length);
