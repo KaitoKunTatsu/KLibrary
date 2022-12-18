@@ -25,12 +25,14 @@ Last stable version: **1.2.0**
 
 ### ServerSocketWrapper
 
-Create a new class that inherits from [ServerSocketWrapper](src/main/java/KLibrary/wrapper/ServerSocketWrapper.java) in order to implement it's 
+Create a new class that inherits from [ServerSocketWrapper](src/main/java/KLibrary/wrapper/ServerSocketWrapper.java) in order to implement its 
 abstract methods: 
 
 - ```onClientConnect``` - Triggered when a client connects to the server and (if necessary) finished a key handshake for encryption 
 - ```onClientDisonnect``` - Triggered when the connection to a client is lost 
 - ```onMessage``` - Triggered when the server receives a message from a client
+
+It's constructor takes a port and boolean which enables encryption if true as paramters. 
 
 Call ```acceptSockets()``` to start listening for sockets.
 
