@@ -21,7 +21,7 @@ This is just a small collection of classes that will help you deal with <br>
 
 Add the [JAR](out/artifacts/KLibrary_jar) to your project as shown [here](https://stackoverflow.com/questions/1051640/correct-way-to-add-external-jars-lib-jar-to-an-intellij-idea-project). That's it. Now you're able to import all classes.
 
-Last stable version: **1.2.0**
+Last stable version: **1.3.0**
 
 ### ServerSocketWrapper
 
